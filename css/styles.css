@@ -875,6 +875,58 @@ a { color: inherit; }
 
 .error-page p { font-weight: 600; color: var(--ink); max-width: 46ch; margin: 14px auto 24px; }
 
+/* ---------- Cookie banner ---------- */
+.cookie-banner {
+  position: fixed;
+  left: 16px;
+  right: 16px;
+  bottom: 16px;
+  z-index: 100;
+  max-width: 760px;
+  margin-inline: auto;
+  background: var(--cocoa);
+  color: var(--cream);
+  border: 3px solid var(--cocoa-2);
+  border-radius: var(--radius-md);
+  box-shadow: 0 16px 44px rgba(0, 0, 0, 0.38);
+  padding: 18px 22px;
+}
+
+.cookie-banner-inner {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.cookie-banner p {
+  margin: 0;
+  flex: 1 1 300px;
+  font-weight: 600;
+}
+
+.cookie-banner a { color: var(--pink); font-weight: 800; }
+
+.cookie-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.cookie-actions .btn { padding: 10px 18px; font-size: 0.95rem; }
+
+.cookie-actions .btn-ghost {
+  background: transparent;
+  color: var(--cream);
+  border-color: var(--cream);
+  box-shadow: 0 4px 0 rgba(255, 242, 227, 0.45);
+}
+.cookie-actions .btn-ghost:hover { box-shadow: 0 6px 0 rgba(255, 242, 227, 0.45); }
+
+@media (max-width: 560px) {
+  .cookie-banner { left: 10px; right: 10px; bottom: 10px; }
+}
+
 /* ---------- Utility ---------- */
 .hidden { display: none !important; }
 .centered { text-align: center; }

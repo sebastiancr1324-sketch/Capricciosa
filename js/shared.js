@@ -83,4 +83,34 @@
     }
   };
   probe.src = cfg.logoMinimal;
+
+  cookieBanner();
+
+  function cookieBanner() {
+    if (typeof localStorage === "undefined") { return; }
+    var pref = localStorage.getItem("capricciosa-cookies");
+    if (pref === "1" || pref === "0") { return; }
+
+    var el = document.createElement("div");
+    el.className = "cookie-banner";
+    el.setAttribute("role", "dialog");
+    el.setAttribute("aria-label", "Aviso de cookies");
+    el.innerHTML =
+      '<div class="cookie-banner-inner">' +
+      '  <p>🍪 Usamos cookies para que el sitio funcione correctamente. No recopilamos datos personales. Conocé más en nuestra <a href="cookies.html">política de cookies</a>.</p>' +
+      '  <div class="cookie-actions">' +
+      '    <button type="button" class="btn btn-primary" data-cb="1">Aceptar</button>' +
+      '    <button type="button" class="btn btn-ghost" data-cb="0">Rechazar</button>' +
+      '  </div>' +
+      '</div>';
+    document.body.appendChild(el);
+
+    var buttons = el.querySelectorAll("[data-cb]");
+    for (var i = 0; i < buttons.length; i++) {
+      buttons[i].addEventListener("click", function () {
+        try { localStorage.setItem("capricciosa-cookies", this.dataset.cb); } catch (e) {}
+        el.remove();
+      });
+    }
+  }
 })();

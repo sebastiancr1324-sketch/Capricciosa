@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Reemplazá TU-DOMINIO.com.ar por tu dominio real
+Sitemap: https://sebastiancr1324-sketch.github.io/Capricciosa.github.io/sitemap.xml

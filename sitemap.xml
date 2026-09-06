@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Reemplazá https://sebastiancr1324-sketch.github.io/Capricciosa.github.io por tu dominio real en todas las URLs.
+  Las páginas de producto se generan con un único archivo product.html
+  y el parámetro "producto": https://sebastiancr1324-sketch.github.io/Capricciosa.github.io/product.html?producto=...
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://sebastiancr1324-sketch.github.io/Capricciosa.github.io/</loc>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://sebastiancr1324-sketch.github.io/Capricciosa.github.io/product.html?producto=tres-leches</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://sebastiancr1324-sketch.github.io/Capricciosa.github.io/product.html?producto=nuvola-chocolate</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sebastiancr1324-sketch.github.io/Capricciosa.github.io/product.html?producto=nuvola-nutella</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sebastiancr1324-sketch.github.io/Capricciosa.github.io/product.html?producto=nuvola-xl</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://sebastiancr1324-sketch.github.io/Capricciosa.github.io/product.html?producto=capriccio</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://sebastiancr1324-sketch.github.io/Capricciosa.github.io/product.html?producto=capriccio-lemon-pie</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://sebastiancr1324-sketch.github.io/Capricciosa.github.io/product.html?producto=capriccio-oreo</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://sebastiancr1324-sketch.github.io/Capricciosa.github.io/product.html?producto=capriccio-samba</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://sebastiancr1324-sketch.github.io/Capricciosa.github.io/product.html?producto=capriccio-cricri</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://sebastiancr1324-sketch.github.io/Capricciosa.github.io/product.html?producto=capriccio-pirulin-nutella</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://sebastiancr1324-sketch.github.io/Capricciosa.github.io/product.html?producto=capriccio-ferrero-nutella</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://sebastiancr1324-sketch.github.io/Capricciosa.github.io/privacidad.html</loc>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://sebastiancr1324-sketch.github.io/Capricciosa.github.io/terminos.html</loc>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://sebastiancr1324-sketch.github.io/Capricciosa.github.io/cookies.html</loc>
+    <priority>0.3</priority>
+  </url>
+</urlset>

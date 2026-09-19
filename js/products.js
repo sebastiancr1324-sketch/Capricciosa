@@ -12,10 +12,10 @@ CAPRICIOSA.CONFIG = {
 };
 
 CAPRICIOSA.CATEGORIES = {
-  "tres-leches": { label: "Tres Leches", color: "#EFC1C7" },
-  "nuvole":      { label: "Nuvole",      color: "#FFF6B3" },
-  "clasicos":    { label: "Clásicos",    color: "#FFF2E3" },
-  "premium":     { label: "Premium",     color: "#E79B7F" }
+  "tres-leches": { label: "Tres Leches", color: "#FD97D6" },
+  "nuvole":      { label: "Nuvole",      color: "#FFF7B4" },
+  "clasicos":    { label: "Clásicos",    color: "#FFF7B4" },
+  "premium":     { label: "Premium",     color: "#FD97D6" }
 };
 
 CAPRICIOSA.PRODUCTS = [
@@ -209,15 +209,27 @@ CAPRICIOSA.helpers = {
     return "https://wa.me/" + CAPRICIOSA.CONFIG.whatsapp + "?text=" + encodeURIComponent("¡Hola " + CAPRICIOSA.CONFIG.brand + "! Quiero hacer un pedido.");
   },
   imgPlaceholder: function (product) {
-    var cat = CAPRICIOSA.CATEGORIES[product.category] || { color: "#EFC1C7" };
+    var cat = CAPRICIOSA.CATEGORIES[product.category] || { color: "#FD97D6" };
     var svg =
       '<svg xmlns="http://www.w3.org/2000/svg" width="640" height="480">' +
       '<rect width="100%" height="100%" fill="' + cat.color + '"/>' +
       '<circle cx="320" cy="210" r="120" fill="#FFFFFF" opacity="0.9"/>' +
       '<text x="320" y="245" font-size="100" text-anchor="middle">' + product.emoji + '</text>' +
-      '<text x="320" y="390" font-family="Fredoka, Arial, sans-serif" font-size="46" font-weight="700" text-anchor="middle" fill="#662F00">' + String(product.sticker).replace(/&/g, "&amp;") + '</text>' +
+      '<text x="320" y="390" font-family="Anton, Arial, sans-serif" font-size="46" font-weight="400" text-anchor="middle" fill="#662F00">' + String(product.sticker).replace(/&/g, "&amp;") + '</text>' +
       '</svg>';
     return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
+  },
+  addToCartButton: function (product) {
+    if (!product || !product.price) { return ""; }
+    return '<button type="button" class="add-btn" data-cart-add="' + product.id + '" aria-label="Agregar ' + product.name + ' al carrito">+ Agregar</button>';
+  },
+  parsePrice: function (product) {
+    if (!product || !product.price) { return null; }
+    var n = parseInt(String(product.price).replace(/[^0-9]/g, ""), 10);
+    return isNaN(n) ? null : n;
+  },
+  formatARS: function (n) {
+    return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ".");
   },
   escapeHtml: function (str) {
     return String(str).replace(/[&<>"']/g, function (c) {

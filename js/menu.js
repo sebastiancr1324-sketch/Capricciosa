@@ -6,7 +6,9 @@
 
   function card(product) {
     var price = esc(helpers.formatPrice(product));
+    var addBtn = helpers.addToCartButton(product);
     return (
+      '<div class="card-wrap">' +
       '<a class="product-card" href="' + helpers.productUrl(product.id) + '" data-cat="' + product.category + '">' +
       '  <div class="card-img">' +
       '    <img src="' + esc(product.image) + '" alt="Foto de ' + esc(product.name) + '" loading="lazy" data-pid="' + esc(product.id) + '" onerror="capriciosaImg(this)">' +
@@ -23,7 +25,9 @@
       '      <span class="card-go">Ver detalle →</span>' +
       '    </div>' +
       '  </div>' +
-      '</a>');
+      '</a>' +
+      addBtn +
+      '</div>');
   }
 
   var grid = document.getElementById("menu-grid");
@@ -56,7 +60,8 @@
     var cards = grid.querySelectorAll(".product-card");
     cards.forEach(function (card) {
       var show = cat === "all" || card.dataset.cat === cat;
-      card.classList.toggle("hidden", !show);
+      var wrapEl = card.closest(".card-wrap") || card;
+      wrapEl.classList.toggle("hidden", !show);
     });
   }
 

@@ -10,10 +10,10 @@
   <meta property="og:description" content="Tortas marquesas, nuvole y tres leches artesanales. Pedí por WhatsApp. Pickup y envíos · San Cristóbal, CABA.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="img/CapricciosaLogoCompleto.jpg">
-  <meta name="theme-color" content="#EFC1C7">
+  <meta name="theme-color" content="#FFDFEF">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
@@ -25,9 +25,8 @@
     <section class="hero">
       <div class="container hero-inner">
         <div>
-          <span class="hero-kicker">🍰 Postres caseros</span>
           <h1>¿Estás para un <span class="hl">capriccito</span>?</h1>
-          <p class="hero-sub">Tortas marquesas venezolanas, nuvole humedecidas en 3 leches y delicias artesanales hechas con amor. Elegí tu favorita y pedí por WhatsApp.</p>
+          <p class="hero-sub">Date ese gusto que no necesitas, pero que definitivamente quieres.<br>Mirá nuestro menú y elegí tu favorita.</p>
           <div class="hero-actions">
             <a class="btn btn-primary" href="#menu">Ver el menú</a>
             <a class="btn btn-ghost" href="https://www.instagram.com/capricciosa_ve" target="_blank" rel="noopener">Seguinos en IG</a>
@@ -38,7 +37,12 @@
           <span class="floating-emoji e2">🍫</span>
           <span class="floating-emoji e3">🥄</span>
           <div class="hero-sticker s1">Hecho con amor ✿</div>
-          <div class="hero-blob">🍰</div>
+          <div class="hero-cover">
+            <div class="cover-photo">
+              <img src="img/LogoFondoBlanco.jpeg" alt="Capricciosa — postres artesanales venezolanos" loading="eager">
+            </div>
+            <div class="cover-caption">Postres venezolanos · San Cristóbal 🍰</div>
+          </div>
           <div class="hero-sticker s2">San Cristóbal, CABA</div>
         </div>
       </div>
@@ -53,7 +57,8 @@
     </div>
 
     <!-- Menu -->
-    <section class="section cream" id="menu">
+    <section class="section bone" id="menu">
+      <span class="brand-stamp lg section-stamp" aria-hidden="true"><img src="img/EstampaVenezuela.jpg" alt=""></span>
       <div class="container">
         <div class="section-head">
           <span class="section-eyebrow">Nuestro menú</span>
@@ -67,6 +72,7 @@
 
     <!-- How to order -->
     <section class="section lemon" id="pedir">
+      <span class="brand-stamp lg section-stamp" aria-hidden="true"><img src="img/EstampaVenezuela.jpg" alt=""></span>
       <div class="container">
         <div class="section-head">
           <span class="section-eyebrow">Así de fácil</span>
@@ -108,6 +114,7 @@
 
   <script src="js/products.js"></script>
   <script src="js/shared.js"></script>
+  <script src="js/cart.js"></script>
   <script src="js/menu.js"></script>
 </body>
 </html>

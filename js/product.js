@@ -9,7 +9,6 @@
   var product = helpers.getProduct(id);
 
   var hero = document.getElementById("product-hero");
-  var heroSection = hero ? hero.closest(".product-hero") : null;
 
   var waIcon =
     '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2a9.9 9.9 0 0 0-8.4 15.2L2.1 22l4.95-1.5A9.93 9.93 0 1 0 12.04 2Zm5.83 14.13c-.24.69-1.42 1.32-1.98 1.36-.53.04-1.04.17-3.47-.72-2.92-1.07-4.78-3.85-4.93-4.03-.14-.18-1.18-1.57-1.18-2.99 0-1.42.74-2.12 1-2.41.26-.29.58-.36.77-.36h.56c.18 0 .42-.07.66.5.24.58.83 2.01.9 2.15.07.14.12.31.02.5-.09.18-.14.3-.28.46-.14.17-.3.37-.43.5-.14.13-.29.28-.12.55.17.26.75 1.24 1.61 2.01 1.11.99 2.04 1.3 2.33 1.44.3.14.47.12.64-.07.17-.18.73-.85.93-1.15.19-.29.39-.24.65-.14.26.09 1.67.79 1.95.93.29.14.48.21.55.33.07.11.07.65-.17 1.33Z"/></svg>';
@@ -28,14 +27,13 @@
     return;
   }
 
-  var cat = CAT[product.category] || { label: "", color: "#EFC1C7" };
+  var cat = CAT[product.category] || { label: "", color: "#FD97D6" };
   var priceLabel = esc(helpers.formatPrice(product));
   var chips = product.keywords.map(function (k) {
     return '<span class="kw-chip">' + esc(k) + '</span>';
   }).join("");
 
   document.title = product.name + " · Capricciosa";
-  if (heroSection) { heroSection.style.background = cat.color; }
 
   var ogTitle = document.querySelector('meta[property="og:title"]');
   var ogDesc = document.querySelector('meta[property="og:description"]');
@@ -59,6 +57,7 @@
       '<div class="product-hero-right">' +
       '  <div class="product-hero-img-wrap">' +
       '    <img class="product-hero-img" src="' + esc(product.image) + '" alt="Foto de ' + esc(product.name) + '" data-pid="' + esc(product.id) + '" onerror="capriciosaImg(this)">' +
+      '    <span class="brand-stamp hero-stamp" aria-hidden="true"><img src="img/EstampaVenezuela.jpg" alt="" onerror="this.parentElement.style.display=\'none\'"></span>' +
       '  </div>' +
       '  <div class="hero-price">' +
       '    <span class="note">' + esc(product.priceNote) + '</span>' +
@@ -84,6 +83,7 @@
       '<div class="wa-emoji">💬</div>' +
       '<h3>¿Te lo llevás?</h3>' +
       '<p>Contanos qué querés y coordinamos el <strong>pickup</strong> o el <strong>envío</strong> en San Cristóbal, CABA.</p>' +
+      (product.price ? '<button type="button" class="btn btn-ghost add-inline" data-cart-add="' + esc(product.id) + '">🛒 Agregar al carrito</button>' : '') +
       '<a class="btn btn-wa" target="_blank" rel="noopener" href="' + helpers.waOrderLink(product) + '">' +
       waIcon + 'Pedir por WhatsApp</a>' +
       '<p style="margin-top:18px;font-size:0.95rem;color:var(--ink)">También podés escribirnos a <a href="tel:+541168351885"><strong>' + esc(CAPRICIOSA.CONFIG.phone) + '</strong></a> o por <a href="' + CAPRICIOSA.CONFIG.instagramUrl + '" target="_blank" rel="noopener">Instagram</a>.</p>';
@@ -103,6 +103,8 @@
       document.getElementById("related").style.display = "none";
     } else {
       related.forEach(function (p) {
+        var wrap = document.createElement("div");
+        wrap.className = "card-wrap";
         var a = document.createElement("a");
         a.className = "product-card";
         a.href = helpers.productUrl(p.id);
@@ -122,7 +124,14 @@
           '    <span class="card-go">Ver detalle →</span>' +
           '  </div>' +
           '</div>';
-        relatedBox.appendChild(a);
+        wrap.appendChild(a);
+        var addHtml = helpers.addToCartButton(p);
+        if (addHtml) {
+          var tpl = document.createElement("div");
+          tpl.innerHTML = addHtml;
+          wrap.appendChild(tpl.firstChild);
+        }
+        relatedBox.appendChild(wrap);
       });
     }
   }

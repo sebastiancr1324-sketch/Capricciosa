@@ -29,9 +29,14 @@
 
   var cat = CAT[product.category] || { label: "", color: "#FD97D6" };
   var priceLabel = esc(helpers.formatPrice(product));
-  var chips = product.keywords.map(function (k) {
-    return '<span class="kw-chip">' + esc(k) + '</span>';
+  var specs = [];
+  if (product.size) { specs.push("⚖ " + product.size); }
+  if (product.dimensions) { specs.push("📐 " + product.dimensions); }
+  if (product.portions) { specs.push("🍰 " + product.portions); }
+  var specChips = specs.map(function (s) {
+    return '<span class="kw-chip">' + esc(s) + '</span>';
   }).join("");
+  var aboutTitle = product.category === "bebidas" ? "🥤 Sobre esta bebida" : "📖 Sobre esta torta";
 
   document.title = product.name + " · Capricciosa";
 
@@ -70,11 +75,10 @@
   var detail = document.getElementById("detail-card");
   if (detail) {
     detail.innerHTML =
-      '<h3>📖 Sobre esta torta</h3>' +
+      '<h3>' + aboutTitle + '</h3>' +
       '<p>' + esc(product.description) + '</p>' +
-      (product.size ? '<p style="margin-top:14px"><strong>Presentación:</strong> ' + esc(product.size) + '</p>' : "") +
-      '<h3 style="margin-top:24px">Ingredientes</h3>' +
-      '<div class="kw-list">' + chips + '</div>';
+      '<h3 style="margin-top:24px">📏 Tamaño y peso</h3>' +
+      '<div class="kw-list">' + specChips + '</div>';
   }
 
   var waPanel = document.getElementById("wa-panel");

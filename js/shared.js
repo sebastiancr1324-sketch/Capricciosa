@@ -4,6 +4,21 @@
 
   var favicon = "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍰</text></svg>";
 
+  var navLinks = [
+    { href: "index.html", label: "Inicio" },
+    { href: "index.html#menu", label: "Menú" },
+    { href: "index.html#pedir", label: "Cómo pedir" },
+    { href: "index.html#contacto", label: "Contacto" }
+  ];
+
+  function navItemsHtml() {
+    var h = "";
+    for (var i = 0; i < navLinks.length; i++) {
+      h += '<li><a href="' + navLinks[i].href + '">' + navLinks[i].label + '</a></li>';
+    }
+    return h;
+  }
+
   var header = document.getElementById("cabecera");
   if (header) {
     header.innerHTML =
@@ -12,15 +27,45 @@
       '    <img class="brand-logo" src="' + esc(cfg.logoMinimal) + '" alt="Capricciosa" onerror="this.style.display=\'none\';this.parentElement.querySelector(\'.brand-name\').style.display=\'inline\';this.removeAttribute(\'onerror\')">' +
       '    <span class="brand-name">Capricciosa</span>' +
       '  </a>' +
-      '  <nav class="main-nav" aria-label="Principal">' +
-      '    <ul>' +
-      '      <li><a href="index.html">Inicio</a></li>' +
-      '      <li><a href="index.html#menu">Menú</a></li>' +
-      '      <li><a href="index.html#pedir">Cómo pedir</a></li>' +
-      '      <li><a href="index.html#contacto">Contacto</a></li>' +
-      '    </ul>' +
-      '  </nav>' +
+      '  <button type="button" class="nav-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-nav">' +
+      '    <span class="nav-toggle-bar"></span>' +
+      '    <span class="nav-toggle-bar"></span>' +
+      '    <span class="nav-toggle-bar"></span>' +
+      '  </button>' +
+      '  <nav class="main-nav" aria-label="Principal"><ul>' + navItemsHtml() + '</ul></nav>' +
+      '  <nav class="mobile-nav" id="mobile-nav" aria-label="Principal"><ul>' + navItemsHtml() + '</ul></nav>' +
       '</div>';
+
+    var toggle = header.querySelector(".nav-toggle");
+    var mNav = header.querySelector(".mobile-nav");
+    if (toggle && mNav) {
+      toggle.addEventListener("click", function () {
+        var open = mNav.classList.toggle("open");
+        toggle.setAttribute("aria-expanded", open ? "true" : "false");
+        toggle.setAttribute("aria-label", open ? "Cerrar menú" : "Abrir menú");
+      });
+      mNav.addEventListener("click", function (e) {
+        if (e.target.closest("a")) {
+          mNav.classList.remove("open");
+          toggle.setAttribute("aria-expanded", "false");
+          toggle.setAttribute("aria-label", "Abrir menú");
+        }
+      });
+      document.addEventListener("click", function (e) {
+        if (mNav.classList.contains("open") && !header.contains(e.target)) {
+          mNav.classList.remove("open");
+          toggle.setAttribute("aria-expanded", "false");
+          toggle.setAttribute("aria-label", "Abrir menú");
+        }
+      });
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape" && mNav.classList.contains("open")) {
+          mNav.classList.remove("open");
+          toggle.setAttribute("aria-expanded", "false");
+          toggle.setAttribute("aria-label", "Abrir menú");
+        }
+      });
+    }
   }
 
   var footer = document.getElementById("contacto");

@@ -5,11 +5,13 @@
  *
  * Por qué existe: WhatsApp, Instagram y Facebook no ejecutan JavaScript al armar la vista
  * previa de un link, así que cada producto necesita su propio HTML con título, descripción
- * y foto. El contenido visible lo sigue dibujando js/product.js con los datos de products.js
- * (precios, tamaños, etc.), así que esos datos se cambian en un solo lugar.
+ * y foto. Además el contenido ya viene escrito en el HTML (con el mismo código de
+ * js/product.js), así la página no salta al cargar. Los datos se cambian en un solo lugar:
+ * js/products.js.
  *
- * Cuándo correrlo: después de agregar o quitar un producto, o de cambiarle el nombre, la
- * descripción o la foto, o si cambia CONFIG.siteUrl. Cambiar solo un precio no hace falta.
+ * Cuándo correrlo: cada vez que cambia algo en js/products.js (productos, precios, fotos o
+ * CONFIG.siteUrl). Si alguien se olvida, el navegador detecta que la página quedó vieja
+ * (data-firma) y la vuelve a dibujar con los datos nuevos.
  *
  * Uso (Node 18 o más nuevo, sin dependencias):  node scripts/generar-paginas.js
  */

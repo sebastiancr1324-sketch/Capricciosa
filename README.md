@@ -9,7 +9,7 @@ Página web de Capricciosa, un emprendimiento de postres venezolanos.
 ## Estructura
 
 - `index.html`: portada y menú
-- `productos/<id>.html`: una página por producto (las genera el script, ver abajo)
+- `productos/<id>.html`: una página por producto (las genera el script a partir de `js/products.js`, ver abajo; no editarlas a mano)
 - `product.html`: redirige los links viejos (`product.html?producto=...`) a `productos/`
 - `js/products.js`: **datos del sitio**: productos, precios, teléfono, WhatsApp, Instagram y dirección del sitio
 - `js/`: lógica (`shared.js` header y pie, `menu.js` menú, `product.js` página de producto, `cart.js` carrito)
@@ -22,7 +22,7 @@ Página web de Capricciosa, un emprendimiento de postres venezolanos.
 
 ## Cambiar un precio
 
-Editá el producto en `js/products.js`. No hace falta nada más.
+Editá el producto en `js/products.js` y corré `node scripts/generar-paginas.js`. Si te olvidás del script, el sitio igual muestra el precio nuevo, pero la página del producto se vuelve a dibujar al cargar (y sin JavaScript se ve el precio viejo).
 
 ## Agregar, quitar o renombrar un producto
 
@@ -30,7 +30,7 @@ Editá el producto en `js/products.js`. No hace falta nada más.
 2. Agregá o editá el producto en `js/products.js` (el `id` solo con minúsculas, números y guiones).
 3. Corré `node scripts/generar-paginas.js` (Node 18 o más nuevo) y subí los cambios.
 
-El paso 3 también hace falta si cambiás el nombre, la descripción o la foto de un producto: son los datos que muestran WhatsApp y las redes al compartir el link.
+El script escribe en `productos/` el contenido de cada producto y los datos que muestran WhatsApp y las redes al compartir el link, así que hay que correrlo cada vez que cambia algo en `js/products.js`.
 
 ## Cambiar de dominio
 

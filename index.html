@@ -1,20 +1,48 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Capricciosa · Postres artesanales</title>
   <meta name="description" content="Tortas marquesas, nuvole y tres leches artesanales. Pedí por WhatsApp. Pickup y envíos · San Cristóbal, CABA.">
-  <link rel="icon" type="image/jpeg" href="img/CapricciosaMinimalistaLogo.jpg">
+  <link rel="canonical" href="https://sebastiancr1324-sketch.github.io/Capricciosa/">
+  <link rel="icon" type="image/png" sizes="48x48" href="img/favicon-48.png">
+  <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+  <meta property="og:site_name" content="Capricciosa">
+  <meta property="og:locale" content="es_AR">
   <meta property="og:title" content="Capricciosa · Postres artesanales">
   <meta property="og:description" content="Tortas marquesas, nuvole y tres leches artesanales. Pedí por WhatsApp. Pickup y envíos · San Cristóbal, CABA.">
   <meta property="og:type" content="website">
-  <meta property="og:image" content="img/CapricciosaLogoCompleto.jpg">
+  <meta property="og:url" content="https://sebastiancr1324-sketch.github.io/Capricciosa/">
+  <meta property="og:image" content="https://sebastiancr1324-sketch.github.io/Capricciosa/img/og-capricciosa.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Capricciosa: postres venezolanos artesanales, pickup y envíos en San Cristóbal, CABA">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="theme-color" content="#FFDFEF">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Bakery",
+    "name": "Capricciosa",
+    "description": "Postres artesanales venezolanos: tortas marquesas, nuvole y tres leches. Pedidos por WhatsApp, pickup y envíos en San Cristóbal, CABA.",
+    "url": "https://sebastiancr1324-sketch.github.io/Capricciosa/",
+    "logo": "https://sebastiancr1324-sketch.github.io/Capricciosa/img/CapricciosaLogoCompleto.jpg",
+    "image": "https://sebastiancr1324-sketch.github.io/Capricciosa/img/og-capricciosa.jpg",
+    "telephone": "+5491168351885",
+    "servesCuisine": "Venezolana",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "San Cristóbal",
+      "addressRegion": "Ciudad Autónoma de Buenos Aires",
+      "addressCountry": "AR"
+    },
+    "sameAs": [
+      "https://www.instagram.com/capricciosa_ve"
+    ]
+  }
+  </script>
 </head>
 <body>
 
@@ -29,17 +57,17 @@
           <p class="hero-sub">Date ese gusto que no necesitas, pero que definitivamente quieres.<br>Mirá nuestro menú y elegí tu favorita.</p>
           <div class="hero-actions">
             <a class="btn btn-primary" href="#menu">Ver el menú</a>
-            <a class="btn btn-ghost" href="https://www.instagram.com/capricciosa_ve" target="_blank" rel="noopener">Seguinos en IG</a>
+            <a class="btn btn-ghost" href="https://www.instagram.com/capricciosa_ve" target="_blank" rel="noopener noreferrer">Seguinos en IG</a>
           </div>
         </div>
         <div class="hero-art">
-          <span class="floating-emoji e1">🍓</span>
-          <span class="floating-emoji e2">🍫</span>
-          <span class="floating-emoji e3">🥄</span>
+          <span class="floating-emoji e1" aria-hidden="true">🍓</span>
+          <span class="floating-emoji e2" aria-hidden="true">🍫</span>
+          <span class="floating-emoji e3" aria-hidden="true">🥄</span>
           <div class="hero-sticker s1">Hecho con amor ✿</div>
           <div class="hero-cover">
             <div class="cover-photo">
-              <img src="img/LogoFondoBlanco.jpeg" alt="Capricciosa — postres artesanales venezolanos" loading="eager">
+              <img src="img/LogoFondoBlanco.webp" alt="Capricciosa — postres artesanales venezolanos" width="500" height="500" fetchpriority="high">
             </div>
             <div class="cover-caption">Postres venezolanos · San Cristóbal 🍰</div>
           </div>
@@ -58,7 +86,7 @@
 
     <!-- Menu -->
     <section class="section bone" id="menu">
-      <span class="brand-stamp lg section-stamp" aria-hidden="true"><img src="img/EstampaVenezuela.jpg" alt=""></span>
+      <span class="brand-stamp lg section-stamp" aria-hidden="true"><img src="img/EstampaVenezuela.webp" alt="" width="324" height="420" loading="lazy"></span>
       <div class="container">
         <div class="section-head">
           <span class="section-eyebrow">Nuestro menú</span>
@@ -67,12 +95,15 @@
         </div>
         <div class="filters" id="filters" role="group" aria-label="Filtrar menú por categoría"></div>
         <div class="menu-grid" id="menu-grid"></div>
+        <noscript>
+          <p class="noscript-msg">Para ver el menú con fotos y precios, activá JavaScript en tu navegador. También podés pedir directo por <a href="https://wa.me/5491168351885?text=%C2%A1Hola%20Capricciosa!%20Quiero%20hacer%20un%20pedido.">WhatsApp</a> o ver nuestros postres en <a href="https://www.instagram.com/capricciosa_ve">Instagram</a>.</p>
+        </noscript>
       </div>
     </section>
 
     <!-- How to order -->
     <section class="section lemon" id="pedir">
-      <span class="brand-stamp lg section-stamp" aria-hidden="true"><img src="img/EstampaVenezuela.jpg" alt=""></span>
+      <span class="brand-stamp lg section-stamp" aria-hidden="true"><img src="img/EstampaVenezuela.webp" alt="" width="324" height="420" loading="lazy"></span>
       <div class="container">
         <div class="section-head">
           <span class="section-eyebrow">Así de fácil</span>
@@ -80,17 +111,17 @@
         </div>
         <div class="steps">
           <div class="step">
-            <div class="s-emoji">👀</div>
+            <div class="s-emoji" aria-hidden="true">👀</div>
             <h3>Elegí tu favorita</h3>
             <p>Mirá el menú y tocá la torta que más te tiente para ver su descripción.</p>
           </div>
           <div class="step">
-            <div class="s-emoji">💬</div>
+            <div class="s-emoji" aria-hidden="true">💬</div>
             <h3>Pedí por WhatsApp</h3>
             <p>Apretá el botón y tu pedido llega listo al chat, con el nombre del postre incluido.</p>
           </div>
           <div class="step">
-            <div class="s-emoji">🚗</div>
+            <div class="s-emoji" aria-hidden="true">🚗</div>
             <h3>Pickup o envío</h3>
             <p>Retirás en San Cristóbal, CABA, o coordinamos el envío. ¡Y a disfrutar!</p>
           </div>
@@ -102,15 +133,18 @@
     <section class="cta-band">
       <div class="container">
         <div>
-          <h2>¿Antojo urgente? 🍫</h2>
+          <h2>¿Antojo urgente? <span aria-hidden="true">🍫</span></h2>
           <p>Escribinos por WhatsApp y coordinamos todo en un minuto.</p>
         </div>
-        <a class="btn btn-wa" id="cta-wa" href="#" target="_blank" rel="noopener">Pedir ahora</a>
+        <a class="btn btn-wa" id="cta-wa" href="https://wa.me/5491168351885?text=%C2%A1Hola%20Capricciosa!%20Quiero%20hacer%20un%20pedido." target="_blank" rel="noopener noreferrer">Pedir ahora</a>
       </div>
     </section>
   </main>
 
-  <footer class="site-footer" id="contacto"></footer>
+  <footer class="site-footer" id="contacto">
+    <!-- Sin JavaScript el pie no se arma: al menos queda el contacto -->
+    <noscript><div class="container"><p class="footer-note">Capricciosa · <a href="tel:+5491168351885">(11) 6835 1885</a> · <a href="https://wa.me/5491168351885">WhatsApp</a> · <a href="https://www.instagram.com/capricciosa_ve">@capricciosa_ve</a></p></div></noscript>
+  </footer>
 
   <script src="js/products.js"></script>
   <script src="js/shared.js"></script>

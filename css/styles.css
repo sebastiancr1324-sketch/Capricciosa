@@ -1,3 +1,69 @@
+/* ---------- Fuentes ---------- */
+/* Alojadas en el sitio (antes venían de Google Fonts). Licencia SIL OFL 1.1: ver fonts/OFL-*.txt.
+   Mismas declaraciones que usaba Google: Anton 400 y Nunito variable declarada en 400/600/700/800. */
+@font-face {
+  font-family: "Anton";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/anton-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/nunito-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("../fonts/nunito-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../fonts/nunito-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("../fonts/nunito-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* Fuentes de reserva ajustadas a las medidas de Anton y Nunito (ancho medido sobre el texto del
+   sitio): mientras la fuente real carga, el texto ocupa casi lo mismo y no salta al cambiar.
+   Mismo unicode-range: los símbolos que Anton/Nunito no tienen (→ ← ✓ ✕) se dibujan como antes. */
+@font-face {
+  font-family: "Anton Fallback";
+  src: local("Arial"), local("Roboto"), local("Liberation Sans");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  size-adjust: 88.8%;
+  ascent-override: 132.5%;
+  descent-override: 37.1%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Nunito Fallback";
+  src: local("Arial"), local("Roboto"), local("Liberation Sans");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  size-adjust: 103%;
+  ascent-override: 98.2%;
+  descent-override: 34.3%;
+  line-gap-override: 0%;
+}
+
 /* ---------- Tokens ---------- */
 :root {
   /* Paleta Capricciosa: crema y rosa de la marca + cacao */
@@ -8,18 +74,16 @@
   --pink: #FD97D6;
 
   --rose: #FD97D6;
-  --salmon: #FD97D6;
   --lemon: #FFF7B4;
 
   --cocoa: #693818;
   --cocoa-2: #693818;
   --ink: #693818;
 
-  --wa: #25D366;
-  --wa-dark: #128C7E;
+  --wa-dark: #108275; /* antes #128C7E: 4,14:1 con texto blanco; ahora 4,70:1 (WCAG AA pide 4,5:1) */
 
-  --font-display: "Anton", "Arial Black", "Baloo 2", "Comic Sans MS", sans-serif;
-  --font-body: "Nunito", "Segoe UI", system-ui, sans-serif;
+  --font-display: "Anton", "Anton Fallback", sans-serif;
+  --font-body: "Nunito", "Nunito Fallback", system-ui, sans-serif;
 
   --radius-sm: 12px;
   --radius-md: 22px;
@@ -35,7 +99,12 @@
 /* ---------- Base ---------- */
 * { box-sizing: border-box; }
 
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+  /* Al saltar a #menu, #pedir o #contacto, que el header fijo (≈76 px) no tape el título.
+     Solo suma lo que le falta al padding superior de la sección (en escritorio queda en 0). */
+  scroll-padding-top: max(0px, 92px - clamp(56px, 8vw, 96px));
+}
 
 body {
   margin: 0;
@@ -55,17 +124,38 @@ h1, h2, h3, .display {
   margin: 0;
 }
 
-img { max-width: 100%; display: block; }
+img { max-width: 100%; height: auto; display: block; }
+
+/* Los <button> no heredan la fuente: sin esto "Vaciar carrito", − y + salían en Arial */
+button { font-family: inherit; }
+
+/* Texto solo para lectores de pantalla */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
 
 a { color: inherit; }
 
 ::selection { background: var(--pink); color: #fff; }
 
 :focus-visible {
-  outline: 3px solid var(--pink);
+  /* Café en vez de rosa: el rosa daba 1,6–2:1 sobre los fondos claros (WCAG pide 3:1) */
+  outline: 3px solid var(--cocoa);
   outline-offset: 3px;
   border-radius: 6px;
 }
+
+/* En las franjas café, el anillo va en crema para que se vea */
+.site-footer :focus-visible,
+.cta-band :focus-visible { outline-color: var(--cream); }
 
 .container {
   width: min(1120px, 100% - 40px);
@@ -77,6 +167,8 @@ a { color: inherit; }
   position: sticky;
   top: 0;
   z-index: 50;
+  /* El contenido del header lo arma JS: se reserva su alto para que la página no baje 74 px al aparecer */
+  min-height: 74px;
   background: color-mix(in srgb, var(--lemon) 92%, transparent);
   backdrop-filter: blur(10px);
   border-bottom: 2px dashed color-mix(in srgb, var(--cocoa) 18%, transparent);
@@ -178,9 +270,11 @@ a { color: inherit; }
   opacity: 0;
   transform: translateY(-8px);
   pointer-events: none;
-  transition: opacity 0.25s var(--ease), transform 0.25s var(--ease);
+  /* visibility: hidden lo saca del Tab y de los lectores de pantalla cuando está cerrado */
+  visibility: hidden;
+  transition: opacity 0.25s var(--ease), transform 0.25s var(--ease), visibility 0s linear 0.25s;
 }
-.mobile-nav.open { opacity: 1; transform: translateY(0); pointer-events: auto; }
+.mobile-nav.open { opacity: 1; transform: translateY(0); pointer-events: auto; visibility: visible; transition-delay: 0s; }
 
 .mobile-nav ul {
   list-style: none;
@@ -486,11 +580,8 @@ a { color: inherit; }
 /* ---------- Sections ---------- */
 .section { position: relative; padding-block: clamp(56px, 8vw, 96px); }
 
-.section.rose   { background: var(--rose); }
-.section.cream  { background: var(--cream); }
 .section.bone   { background: var(--bone); }
 .section.lemon  { background: var(--lemon); }
-.section.salmon { background: var(--salmon); }
 
 .section-head {
   max-width: 640px;
@@ -680,13 +771,6 @@ a { color: inherit; }
 
 .product-card:hover .card-go { background: var(--cocoa-2); transform: scale(1.06); }
 
-.card-foot .wa-mini {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.9rem;
-}
-
 /* ---------- How to order ---------- */
 .steps {
   display: grid;
@@ -795,7 +879,7 @@ a { color: inherit; }
   margin: 4px 0 0;
 }
 
-.site-footer h3 { color: #fff; font-size: 1.15rem; margin-bottom: 12px; }
+.site-footer h2 { color: #fff; font-size: 1.15rem; margin-bottom: 12px; }
 .site-footer ul { list-style: none; margin: 0; padding: 0; }
 .site-footer li { margin-bottom: 8px; font-weight: 600; }
 .site-footer a { color: var(--cream); font-weight: 700; }
@@ -856,6 +940,10 @@ a { color: inherit; }
   align-items: center;
 }
 
+/* Versión sin JavaScript */
+.noscript-msg { text-align: center; font-weight: 700; max-width: 50ch; margin: 0 auto; }
+.noscript-msg a { font-weight: 800; }
+
 .product-hero-right {
   display: grid;
   gap: 24px;
@@ -889,7 +977,7 @@ a { color: inherit; }
   margin: 16px 0 22px;
 }
 
-.product-hero .chip-row span {
+.product-hero .chip-row > span {
   font-family: var(--font-display);
   font-weight: 600;
   font-size: 0.9rem;
@@ -936,7 +1024,7 @@ a { color: inherit; }
   justify-content: center;
 }
 
-.detail-card h3 { font-size: 1.35rem; margin-bottom: 12px; }
+.detail-card h2 { font-size: 1.35rem; margin-bottom: 12px; }
 .detail-card p { margin: 0 0 10px; font-weight: 600; color: var(--ink); }
 
 .kw-list { display: flex; flex-wrap: wrap; gap: 8px; }
@@ -965,7 +1053,9 @@ a { color: inherit; }
 
 .related-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  /* auto-fit: las 3 tarjetas ocupan todo el ancho (con auto-fill quedaba una 4.ª columna vacía
+     y "ARS 12.500" / "Ver detalle →" se partían en dos líneas) */
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 22px;
 }
 
@@ -1019,78 +1109,10 @@ a { color: inherit; }
   color: var(--cocoa-2);
 }
 
-.error-page .blob {
-  width: min(160px, 40vw);
-  aspect-ratio: 1;
-  margin: 0 auto 20px;
-  border-radius: 45% 58% 52% 48%;
-  background: linear-gradient(160deg, var(--pink), var(--salmon));
-  display: grid;
-  place-items: center;
-  font-size: 3.4rem;
-  box-shadow: var(--shadow-lift);
-  transform: rotate(-4deg);
-}
-
 .error-page p { font-weight: 600; color: var(--ink); max-width: 46ch; margin: 14px auto 24px; }
-
-/* ---------- Cookie banner ---------- */
-.cookie-banner {
-  position: fixed;
-  left: 16px;
-  right: 16px;
-  bottom: 16px;
-  z-index: 100;
-  max-width: 760px;
-  margin-inline: auto;
-  background: var(--cocoa);
-  color: var(--cream);
-  border: 3px solid var(--cocoa-2);
-  border-radius: var(--radius-md);
-  box-shadow: 0 16px 44px rgba(0, 0, 0, 0.38);
-  padding: 18px 22px;
-}
-
-.cookie-banner-inner {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  flex-wrap: wrap;
-}
-
-.cookie-banner p {
-  margin: 0;
-  flex: 1 1 300px;
-  font-weight: 600;
-}
-
-.cookie-banner a { color: var(--pink); font-weight: 800; }
-
-.cookie-actions {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-.cookie-actions .btn { padding: 10px 18px; font-size: 0.95rem; }
-
-.cookie-actions .btn-ghost {
-  background: transparent;
-  color: var(--cream);
-  border-color: var(--cream);
-  box-shadow: 0 4px 0 rgba(255, 247, 180, 0.45);
-}
-.cookie-actions .btn-ghost:hover { box-shadow: 0 6px 0 rgba(255, 247, 180, 0.45); }
-
-@media (max-width: 560px) {
-  .cookie-banner { left: 10px; right: 10px; bottom: 10px; }
-}
 
 /* ---------- Utility ---------- */
 .hidden { display: none !important; }
-.centered { text-align: center; }
-
-.category-strip { text-align: center; font-weight: 800; letter-spacing: 0.1em; }
 
 /* ---------- Carrito ---------- */
 .card-wrap { position: relative; display: flex; }
@@ -1183,9 +1205,11 @@ a { color: inherit; }
   display: flex;
   flex-direction: column;
   transform: translateX(102%);
-  transition: transform 0.32s var(--ease);
+  /* Cerrado: oculto para el teclado, los lectores de pantalla y sin sombra asomando por el borde */
+  visibility: hidden;
+  transition: transform 0.32s var(--ease), visibility 0s linear 0.32s;
 }
-.cart-drawer.open { transform: translateX(0); }
+.cart-drawer.open { transform: translateX(0); visibility: visible; transition-delay: 0s; }
 
 .cart-head {
   display: flex;
@@ -1195,7 +1219,7 @@ a { color: inherit; }
   padding: 20px 22px;
   border-bottom: 2px dashed color-mix(in srgb, var(--cocoa) 25%, transparent);
 }
-.cart-head h3 { font-size: 1.5rem; }
+.cart-head h2 { font-size: 1.5rem; }
 
 .cart-close {
   width: 38px;
@@ -1293,6 +1317,7 @@ a { color: inherit; }
   color: var(--ink);
   font-weight: 800;
   font-size: 0.85rem;
+  line-height: 1.1; /* mismo alto que tenía con Arial */
   padding: 8px;
   border-radius: var(--radius-pill);
   cursor: pointer;
@@ -1337,6 +1362,9 @@ body.no-scroll { overflow: hidden; }
 }
 
 @media (max-width: 560px) {
+  /* Espacio extra al final para que el botón del carrito (58 px a 18 px del borde) no tape el © */
+  .site-footer { padding-bottom: 70px; }
+  .site-header { min-height: 76px; }
   .header-inner { justify-content: space-between; }
   .main-nav { display: none; }
   .nav-toggle { display: inline-flex; }

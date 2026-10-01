@@ -1,14 +1,19 @@
-﻿window.CAPRICIOSA = window.CAPRICIOSA || {};
+window.CAPRICIOSA = window.CAPRICIOSA || {};
 
 CAPRICIOSA.CONFIG = {
   brand: "Capricciosa",
+  // Dirección pública del sitio (con / al final). Si cambia el dominio, cambiala acá y corré
+  // "node scripts/generar-paginas.js" (ver README).
+  siteUrl: "https://sebastiancr1324-sketch.github.io/Capricciosa/",
   whatsapp: "5491168351885",
   phone: "(11) 6835 1885",
+  // Formato internacional para llamar a un celular argentino: +54 9 11 ...
+  phoneTel: "+5491168351885",
   instagram: "capricciosa_ve",
   instagramUrl: "https://www.instagram.com/capricciosa_ve",
   location: "Pickup y envíos · San Cristóbal, CABA",
-  logoMinimal: "img/CapricciosaMinimalistaLogo.jpg",
-  logoFull: "img/CapricciosaLogoCompleto.jpg"
+  logoMinimal: "img/CapricciosaMinimalistaLogo.webp",
+  logoFull: "img/CapricciosaLogoCompleto.webp"
 };
 
 CAPRICIOSA.CATEGORIES = {
@@ -30,7 +35,6 @@ CAPRICIOSA.PRODUCTS = [
     dimensions: "Molde redondo de 18 cm",
     portions: "6 porciones",
     description: "Bizcochuelo de vainilla humedecido con 3 leches, coronado con un merengue liviano y lluvia de canela.",
-    keywords: ["vainilla", "3 leches", "merengue", "canela"],
     sticker: "3L",
     emoji: "🍰",
     image: "img/TresLeches.jpg",
@@ -47,7 +51,6 @@ CAPRICIOSA.PRODUCTS = [
     dimensions: "Molde redondo de 18 cm",
     portions: "6 porciones",
     description: "Bizcochuelo de vainilla humedecido con 3 leches con un toque de chocolate.",
-    keywords: ["vainilla", "3 leches", "chocolate"],
     sticker: "Nu",
     emoji: "🍫",
     image: "img/NuvolaChocolate.jpeg",
@@ -64,7 +67,6 @@ CAPRICIOSA.PRODUCTS = [
     dimensions: "Molde redondo de 18 cm",
     portions: "6 porciones",
     description: "Bizcochuelo de vainilla relleno de Nutella, humedecido con 3 leches.",
-    keywords: ["vainilla", "3 leches", "nutella"],
     sticker: "Nu",
     emoji: "🥜",
     image: "img/NuvolaNutella.jpg",
@@ -81,7 +83,6 @@ CAPRICIOSA.PRODUCTS = [
     dimensions: "Molde XL de 24 cm",
     portions: "12 porciones",
     description: "Bizcochuelo de vainilla humedecido con 3 leches en versión XL para compartir.",
-    keywords: ["vainilla", "3 leches", "XL"],
     sticker: "XL",
     emoji: "🍮",
     image: "img/NuvolaXl.jpg",
@@ -98,7 +99,6 @@ CAPRICIOSA.PRODUCTS = [
     dimensions: "Molde redondo de 18 cm",
     portions: "8 porciones",
     description: "Clásica torta marquesa venezolana elaborada con capas de galletas y una cremosa mezcla de chocolate.",
-    keywords: ["galletas", "chocolate", "marquesa"],
     sticker: "C",
     emoji: "🍩",
     image: "img/Capriccio.jpg",
@@ -115,7 +115,6 @@ CAPRICIOSA.PRODUCTS = [
     dimensions: "Molde redondo de 18 cm",
     portions: "8 porciones",
     description: "Delicada crema de limón con capas de galletas coronada con merengue y limón.",
-    keywords: ["limón", "galletas", "merengue"],
     sticker: "LP",
     emoji: "🍋",
     image: "img/CapriccioLemonPie.jpg",
@@ -132,7 +131,6 @@ CAPRICIOSA.PRODUCTS = [
     dimensions: "Molde redondo de 18 cm",
     portions: "8 porciones",
     description: "Clásica torta marquesa venezolana con topping de alfajor de Oreo triple.",
-    keywords: ["galletas", "oreo", "marquesa"],
     sticker: "Or",
     emoji: "🍪",
     image: "img/CapriccioOreo.jpg",
@@ -149,7 +147,6 @@ CAPRICIOSA.PRODUCTS = [
     dimensions: "Molde redondo de 18 cm",
     portions: "8 porciones",
     description: "Clásica torta marquesa venezolana con topping de Samba® de frutilla.",
-    keywords: ["galletas", "frutilla", "samba"],
     sticker: "Sa",
     emoji: "🍓",
     image: "img/CapriccioSamba.jpg",
@@ -166,7 +163,6 @@ CAPRICIOSA.PRODUCTS = [
     dimensions: "Molde redondo de 18 cm",
     portions: "8 porciones",
     description: "Clásica torta marquesa venezolana con chocolate savey Cricri® con sabor venezolano.",
-    keywords: ["galletas", "cricri", "chocolate"],
     sticker: "Cr",
     emoji: "🍫",
     image: "img/CapriccioCricri.jpg",
@@ -183,7 +179,6 @@ CAPRICIOSA.PRODUCTS = [
     dimensions: "Molde redondo de 18 cm",
     portions: "8 porciones",
     description: "Clásica marquesa venezolana con capas de galletas, crema de chocolate y el inconfundible sabor del pirulín y la nutella.",
-    keywords: ["galletas", "pirulín", "nutella"],
     sticker: "P&N",
     emoji: "🍬",
     image: "img/CapriccioPirulin.jpg",
@@ -200,7 +195,6 @@ CAPRICIOSA.PRODUCTS = [
     dimensions: "Molde redondo de 18 cm",
     portions: "8 porciones",
     description: "Inspirada en los amantes del chocolate intenso y las avellanas, combina capas suaves de crema de chocolate y galletas con topping de Ferrero Rocher.",
-    keywords: ["galletas", "ferrero", "avellanas"],
     sticker: "F&N",
     emoji: "🍒",
     image: "img/CapricciosaFerrero.jpg",
@@ -217,7 +211,6 @@ CAPRICIOSA.PRODUCTS = [
     dimensions: "Botella individual",
     portions: null,
     description: "Malta venezolana sin alcohol: malteada, oscura y bien dulce, con notas de cereal tostado. Se toma bien fría.",
-    keywords: ["malta", "sin alcohol", "venezolana"],
     sticker: "58",
     emoji: "🍺",
     image: "img/Malta58.jpeg",
@@ -234,7 +227,6 @@ CAPRICIOSA.PRODUCTS = [
     dimensions: "Botella individual",
     portions: null,
     description: "Gaseosa venezolana sabor kola de Reko Bebidas. Dulce, burbujeante y con sabor de casa.",
-    keywords: ["gaseosa", "kola", "venezolana"],
     sticker: "Rk",
     emoji: "🥤",
     image: "img/Rekolita.jpeg",
@@ -251,7 +243,6 @@ CAPRICIOSA.PRODUCTS = [
     dimensions: "Botella individual",
     portions: null,
     description: "Gaseosa venezolana sabor piña de Reko Bebidas. Refrescante, chispeante y ligeramente ácida.",
-    keywords: ["gaseosa", "piña", "venezolana"],
     sticker: "Rp",
     emoji: "🍍",
     image: "img/Rekopina.jpg",
@@ -263,8 +254,12 @@ CAPRICIOSA.helpers = {
   getProduct: function (id) {
     return CAPRICIOSA.PRODUCTS.find(function (p) { return p.id === id; });
   },
+  // Foto que se muestra: la versión .webp (pesa la mitad). Si falta, capriciosaImg usa el JPEG original
+  photo: function (product) {
+    return product.image.replace(/\.(jpe?g|png)$/i, ".webp");
+  },
   productUrl: function (id) {
-    return "product.html?producto=" + encodeURIComponent(id);
+    return "productos/" + encodeURIComponent(id) + ".html";
   },
   formatPrice: function (product) {
     return product.price ? product.priceNote + " " + product.price : product.priceNote;
@@ -294,7 +289,8 @@ CAPRICIOSA.helpers = {
   },
   addToCartButton: function (product) {
     if (!product || !product.price) { return ""; }
-    return '<button type="button" class="add-btn" data-cart-add="' + product.id + '" aria-label="Agregar ' + product.name + ' al carrito">+ Agregar</button>';
+    var esc = CAPRICIOSA.helpers.escapeHtml;
+    return '<button type="button" class="add-btn" data-cart-add="' + esc(product.id) + '" aria-label="Agregar ' + esc(product.name) + ' al carrito">+ Agregar</button>';
   },
   parsePrice: function (product) {
     if (!product || !product.price) { return null; }
@@ -304,6 +300,10 @@ CAPRICIOSA.helpers = {
   formatARS: function (n) {
     return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ".");
   },
+  // Emoji decorativo: se ve igual pero el lector de pantalla no lo lee
+  deco: function (emoji) {
+    return '<span aria-hidden="true">' + emoji + '</span>';
+  },
   escapeHtml: function (str) {
     return String(str).replace(/[&<>"']/g, function (c) {
       return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
@@ -311,26 +311,15 @@ CAPRICIOSA.helpers = {
   }
 };
 
+// Si la foto no carga: primero prueba el JPEG original y, si tampoco está, muestra un dibujo de reserva
 window.capriciosaImg = function (img) {
   var p = img && img.dataset ? CAPRICIOSA.helpers.getProduct(img.dataset.pid) : null;
-  if (img) {
-    img.onerror = null;
-    if (p) { img.src = CAPRICIOSA.helpers.imgPlaceholder(p); }
+  if (!img || !p) { return; }
+  if (!img.dataset.fallback && img.getAttribute("src") !== p.image) {
+    img.dataset.fallback = "1";
+    img.src = p.image;
+    return;
   }
+  img.onerror = null;
+  img.src = CAPRICIOSA.helpers.imgPlaceholder(p);
 };
-
-window.CAPRICIOSA.imgSweep = function () {
-  var imgs = document.querySelectorAll("img[data-pid]");
-  for (var i = 0; i < imgs.length; i++) {
-    var img = imgs[i];
-    if (img.src.indexOf("data:image/svg") === 0) { continue; }
-    if (img.complete && img.naturalWidth === 0) {
-      window.capriciosaImg(img);
-    } else if (!img.complete) {
-      img.addEventListener("error", function () { window.capriciosaImg(this); });
-    }
-  }
-};
-
-window.addEventListener("load", window.CAPRICIOSA.imgSweep);
-setTimeout(window.CAPRICIOSA.imgSweep, 2500);

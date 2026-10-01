@@ -6,7 +6,7 @@
 
   var state = load();
 
-  var fab, badge, overlay, drawer, bodyEl, totalEl, checkoutEl;
+  var badge, overlay, drawer, bodyEl, totalEl, checkoutEl, liveEl;
 
   function load() {
     try {
@@ -80,27 +80,70 @@
     render();
   }
 
+  var lastFocus = null;
+
+  function isOpen() {
+    return drawer.classList.contains("open");
+  }
+
+  function focusables() {
+    return Array.prototype.filter.call(
+      drawer.querySelectorAll("a[href], button:not([disabled])"),
+      function (el) { return el.offsetWidth > 0 || el.offsetHeight > 0; }
+    );
+  }
+
   function open() {
+    lastFocus = document.activeElement;
     overlay.classList.add("open");
     drawer.classList.add("open");
     document.body.classList.add("no-scroll");
+    drawer.querySelector(".cart-close").focus();
   }
 
   function close() {
+    if (!isOpen()) { return; }
     overlay.classList.remove("open");
     drawer.classList.remove("open");
     document.body.classList.remove("no-scroll");
+    // Devuelve el foco a quien abrió el carrito (normalmente el botón 🛒)
+    if (lastFocus && document.contains(lastFocus)) { lastFocus.focus(); }
+    lastFocus = null;
+  }
+
+  // Mientras el carrito está abierto, Tab y Shift+Tab recorren solo el panel
+  function trapTab(e) {
+    var items = focusables();
+    if (!items.length) { return; }
+    var first = items[0];
+    var last = items[items.length - 1];
+    if (e.shiftKey && (document.activeElement === first || !drawer.contains(document.activeElement))) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && (document.activeElement === last || !drawer.contains(document.activeElement))) {
+      e.preventDefault();
+      first.focus();
+    }
   }
 
   function flash(btn) {
     if (!btn) { return; }
-    var original = btn.innerHTML;
+    // El texto original se guarda una sola vez: con dos toques seguidos antes se guardaba
+    // "✓ Agregado" como original y el botón quedaba trabado así
+    if (!btn.dataset.label) { btn.dataset.label = btn.innerHTML; }
+    clearTimeout(btn.flashTimer);
     btn.innerHTML = "✓ Agregado";
     btn.classList.add("added");
-    setTimeout(function () {
-      btn.innerHTML = original;
+    btn.flashTimer = setTimeout(function () {
+      btn.innerHTML = btn.dataset.label;
       btn.classList.remove("added");
     }, 1200);
+  }
+
+  function announce(text) {
+    // Región aria-live: el lector de pantalla avisa que se agregó, sin cambiar nada visible
+    liveEl.textContent = "";
+    setTimeout(function () { liveEl.textContent = text; }, 50);
   }
 
   function waLink() {
@@ -145,7 +188,7 @@
     if (!ids.length) {
       bodyEl.innerHTML =
         '<div class="cart-empty">' +
-        '  <div class="ce-emoji">🍩</div>' +
+        '  <div class="ce-emoji" aria-hidden="true">🍩</div>' +
         '  <h3 style="font-size:1.25rem;margin-bottom:6px">Tu carrito está vacío</h3>' +
         '  <p style="font-weight:600;color:var(--ink)">Agregá tus capriccitos favoritos y armá tu pedido.</p>' +
         '</div>';
@@ -159,7 +202,7 @@
         var lineTotal = price ? p.priceNote + " " + helpers.formatARS(price * qty) : p.priceNote;
         html +=
           '<div class="cart-item">' +
-          '  <span class="ci-emoji">' + (p.emoji || "🍰") + '</span>' +
+          '  <span class="ci-emoji" aria-hidden="true">' + (p.emoji || "🍰") + '</span>' +
           '  <div class="ci-info">' +
           '    <span class="ci-name">' + esc(p.name) + '</span>' +
           '    <span class="ci-unit">' + esc(p.priceNote) + ' ' + esc(p.price) + ' c/u</span>' +
@@ -181,22 +224,30 @@
     badge.classList.toggle("hidden", n === 0);
     totalEl.textContent = priceNote() + " " + helpers.formatARS(total());
     checkoutEl.classList.toggle("disabled", n === 0);
-    checkoutEl.href = n ? waLink() : "#";
+    // Sin productos el enlace no tiene destino: sin href tampoco se puede enfocar ni abrir con Enter
+    if (n) {
+      checkoutEl.href = waLink();
+      checkoutEl.removeAttribute("aria-disabled");
+    } else {
+      checkoutEl.removeAttribute("href");
+      checkoutEl.setAttribute("aria-disabled", "true");
+    }
   }
 
   function buildDOM() {
     var rootEl = document.createElement("div");
     rootEl.innerHTML =
       '<button type="button" class="cart-fab" data-cart-open aria-label="Abrir tu pedido">' +
-      '  🛒' +
+      '  <span aria-hidden="true">🛒</span>' +
       '  <span class="cart-badge hidden" data-cart-badge>0</span>' +
       '</button>' +
       '<div class="cart-overlay" data-cart-close></div>' +
-      '<aside class="cart-drawer" data-cart-drawer role="dialog" aria-modal="true" aria-label="Tu pedido">' +
+      '<p class="sr-only" aria-live="polite" data-cart-live></p>' +
+      '<aside class="cart-drawer" data-cart-drawer role="dialog" aria-modal="true" aria-labelledby="cart-title">' +
       '  <div class="cart-head">' +
       '    <div>' +
       '      <span class="section-eyebrow">Carrito</span>' +
-      '      <h3>Tu pedido 🍰</h3>' +
+      '      <h2 id="cart-title">Tu pedido <span aria-hidden="true">🍰</span></h2>' +
       '    </div>' +
       '    <button type="button" class="cart-close" data-cart-close aria-label="Cerrar">✕</button>' +
       '  </div>' +
@@ -206,7 +257,7 @@
       '      <span>Subtotal</span>' +
       '      <span class="cart-total-value" data-cart-total>ARS 0</span>' +
       '    </div>' +
-      '    <a class="btn btn-wa cart-checkout" data-cart-checkout href="#" target="_blank" rel="noopener">' +
+      '    <a class="btn btn-wa cart-checkout" data-cart-checkout target="_blank" rel="noopener noreferrer">' +
       waIcon() + 'Pedir por WhatsApp' +
       '    </a>' +
       '    <button type="button" class="cart-clear" data-cart-clear>Vaciar carrito</button>' +
@@ -216,20 +267,23 @@
 
     while (rootEl.firstChild) { document.body.appendChild(rootEl.firstChild); }
 
-    fab = document.querySelector(".cart-fab");
     badge = document.querySelector("[data-cart-badge]");
     overlay = document.querySelector(".cart-overlay");
     drawer = document.querySelector("[data-cart-drawer]");
     bodyEl = document.querySelector("[data-cart-body]");
     totalEl = document.querySelector("[data-cart-total]");
     checkoutEl = document.querySelector("[data-cart-checkout]");
+    liveEl = document.querySelector("[data-cart-live]");
   }
 
   document.addEventListener("click", function (e) {
     var addBtn = e.target.closest("[data-cart-add]");
     if (addBtn) {
-      add(addBtn.getAttribute("data-cart-add"));
+      var addId = addBtn.getAttribute("data-cart-add");
+      add(addId);
       flash(addBtn);
+      var added = helpers.getProduct(addId);
+      if (added) { announce(added.name + " agregado al carrito. Total: " + count() + " en tu pedido."); }
       return;
     }
     var inc = e.target.closest("[data-cart-inc]");
@@ -255,7 +309,17 @@
   });
 
   document.addEventListener("keydown", function (e) {
+    if (!isOpen()) { return; }
     if (e.key === "Escape") { close(); }
+    if (e.key === "Tab") { trapTab(e); }
+  });
+
+  // Si el carrito cambia en otra pestaña, se actualiza acá y no se pisa al guardar
+  window.addEventListener("storage", function (e) {
+    if (e.key === STORAGE_KEY) {
+      state = load();
+      render();
+    }
   });
 
   buildDOM();

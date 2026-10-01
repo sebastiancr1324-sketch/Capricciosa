@@ -11,7 +11,7 @@
       '<div class="card-wrap">' +
       '<a class="product-card" href="' + helpers.productUrl(product.id) + '" data-cat="' + product.category + '">' +
       '  <div class="card-img">' +
-      '    <img src="' + esc(product.image) + '" alt="Foto de ' + esc(product.name) + '" loading="lazy" data-pid="' + esc(product.id) + '" onerror="capriciosaImg(this)">' +
+      '    <img src="' + esc(helpers.photo(product)) + '" alt="Foto de ' + esc(product.name) + '" loading="lazy" data-pid="' + esc(product.id) + '" onerror="capriciosaImg(this)">' +
       '  </div>' +
       '  <div class="card-body">' +
       '    <div class="card-top">' +
@@ -44,7 +44,8 @@
   allBtn.type = "button";
   allBtn.className = "chip active";
   allBtn.dataset.cat = "all";
-  allBtn.textContent = "Todo el menú 🎂";
+  allBtn.setAttribute("aria-pressed", "true");
+  allBtn.innerHTML = 'Todo el menú <span aria-hidden="true">🎂</span>';
   wrap.appendChild(allBtn);
 
   keys.forEach(function (key) {
@@ -52,15 +53,16 @@
     btn.type = "button";
     btn.className = "chip";
     btn.dataset.cat = key;
+    btn.setAttribute("aria-pressed", "false");
     btn.textContent = CAT[key].label;
     wrap.appendChild(btn);
   });
 
   function applyFilter(cat) {
     var cards = grid.querySelectorAll(".product-card");
-    cards.forEach(function (card) {
-      var show = cat === "all" || card.dataset.cat === cat;
-      var wrapEl = card.closest(".card-wrap") || card;
+    cards.forEach(function (el) {
+      var show = cat === "all" || el.dataset.cat === cat;
+      var wrapEl = el.closest(".card-wrap") || el;
       wrapEl.classList.toggle("hidden", !show);
     });
   }
@@ -68,8 +70,13 @@
   wrap.addEventListener("click", function (e) {
     var btn = e.target.closest(".chip");
     if (!btn) return;
-    wrap.querySelectorAll(".chip").forEach(function (c) { c.classList.remove("active"); });
+    // aria-pressed le dice al lector de pantalla qué filtro está activo
+    wrap.querySelectorAll(".chip").forEach(function (c) {
+      c.classList.remove("active");
+      c.setAttribute("aria-pressed", "false");
+    });
     btn.classList.add("active");
+    btn.setAttribute("aria-pressed", "true");
     applyFilter(btn.dataset.cat);
   });
 })();

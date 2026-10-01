@@ -2,14 +2,14 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
+  <!-- Lo escribe scripts/generar-paginas.js según CONFIG.siteUrl -->
+  <base href="/Capricciosa/">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Página no encontrada · Capricciosa</title>
   <meta name="robots" content="noindex">
-  <link rel="icon" type="image/jpeg" href="img/CapricciosaMinimalistaLogo.jpg">
+  <link rel="icon" type="image/png" sizes="48x48" href="img/favicon-48.png">
+  <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
   <meta name="theme-color" content="#FFDFEF">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
@@ -20,19 +20,22 @@
     <section class="section bone">
 <div class="container error-page">
         <a class="crumb" href="index.html">← Volver al inicio</a>
-        <span class="brand-stamp lg error-stamp" aria-hidden="true"><img src="img/EstampaVenezuela.jpg" alt="" onerror="this.parentElement.style.display='none'"></span>
+        <span class="brand-stamp lg error-stamp" aria-hidden="true"><img src="img/EstampaVenezuela.webp" alt="" width="324" height="420" onerror="this.parentElement.style.display='none'"></span>
         <div class="code">404</div>
         <h1 style="font-size:clamp(1.8rem,4vw,2.6rem)">Este capriccito se nos escapó</h1>
         <p>La página que buscás no existe o cambió de lugar. Pero no te preocupes: el menú siempre está del otro lado.</p>
         <div class="hero-actions" style="justify-content:center">
           <a class="btn btn-primary" href="index.html#menu">Ver el menú</a>
-          <a class="btn btn-ghost" href="https://wa.me/5491168351885" target="_blank" rel="noopener">Pedir por WhatsApp</a>
+          <a class="btn btn-ghost" href="https://wa.me/5491168351885" target="_blank" rel="noopener noreferrer">Pedir por WhatsApp</a>
         </div>
       </div>
     </section>
   </main>
 
-  <footer class="site-footer" id="contacto"></footer>
+  <footer class="site-footer" id="contacto">
+    <!-- Sin JavaScript el pie no se arma: al menos queda el contacto -->
+    <noscript><div class="container"><p class="footer-note">Capricciosa · <a href="tel:+5491168351885">(11) 6835 1885</a> · <a href="https://wa.me/5491168351885">WhatsApp</a> · <a href="https://www.instagram.com/capricciosa_ve">@capricciosa_ve</a></p></div></noscript>
+  </footer>
 
   <script src="js/products.js"></script>
   <script src="js/shared.js"></script>

@@ -60,9 +60,9 @@
 
   function applyFilter(cat) {
     var cards = grid.querySelectorAll(".product-card");
-    cards.forEach(function (card) {
-      var show = cat === "all" || card.dataset.cat === cat;
-      var wrapEl = card.closest(".card-wrap") || card;
+    cards.forEach(function (el) {
+      var show = cat === "all" || el.dataset.cat === cat;
+      var wrapEl = el.closest(".card-wrap") || el;
       wrapEl.classList.toggle("hidden", !show);
     });
   }

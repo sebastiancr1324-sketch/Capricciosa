@@ -74,14 +74,12 @@
   --pink: #FD97D6;
 
   --rose: #FD97D6;
-  --salmon: #FD97D6;
   --lemon: #FFF7B4;
 
   --cocoa: #693818;
   --cocoa-2: #693818;
   --ink: #693818;
 
-  --wa: #25D366;
   --wa-dark: #108275; /* antes #128C7E: 4,14:1 con texto blanco; ahora 4,70:1 (WCAG AA pide 4,5:1) */
 
   --font-display: "Anton", "Anton Fallback", sans-serif;
@@ -582,11 +580,8 @@ a { color: inherit; }
 /* ---------- Sections ---------- */
 .section { position: relative; padding-block: clamp(56px, 8vw, 96px); }
 
-.section.rose   { background: var(--rose); }
-.section.cream  { background: var(--cream); }
 .section.bone   { background: var(--bone); }
 .section.lemon  { background: var(--lemon); }
-.section.salmon { background: var(--salmon); }
 
 .section-head {
   max-width: 640px;
@@ -775,13 +770,6 @@ a { color: inherit; }
 }
 
 .product-card:hover .card-go { background: var(--cocoa-2); transform: scale(1.06); }
-
-.card-foot .wa-mini {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.9rem;
-}
 
 /* ---------- How to order ---------- */
 .steps {
@@ -1124,26 +1112,10 @@ a { color: inherit; }
   color: var(--cocoa-2);
 }
 
-.error-page .blob {
-  width: min(160px, 40vw);
-  aspect-ratio: 1;
-  margin: 0 auto 20px;
-  border-radius: 45% 58% 52% 48%;
-  background: linear-gradient(160deg, var(--pink), var(--salmon));
-  display: grid;
-  place-items: center;
-  font-size: 3.4rem;
-  box-shadow: var(--shadow-lift);
-  transform: rotate(-4deg);
-}
-
 .error-page p { font-weight: 600; color: var(--ink); max-width: 46ch; margin: 14px auto 24px; }
 
 /* ---------- Utility ---------- */
 .hidden { display: none !important; }
-.centered { text-align: center; }
-
-.category-strip { text-align: center; font-weight: 800; letter-spacing: 0.1em; }
 
 /* ---------- Carrito ---------- */
 .card-wrap { position: relative; display: flex; }

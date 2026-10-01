@@ -1,4 +1,4 @@
-﻿(function () {
+(function () {
   var helpers = CAPRICIOSA.helpers;
   var CAT = CAPRICIOSA.CATEGORIES;
   var PRODUCTS = CAPRICIOSA.PRODUCTS;
@@ -29,7 +29,6 @@
   }
 
   var cat = CAT[product.category] || { label: "", color: "#FD97D6" };
-  var priceLabel = esc(helpers.formatPrice(product));
   var specs = [];
   if (product.size) { specs.push(["⚖", product.size]); }
   if (product.dimensions) { specs.push(["📐", product.dimensions]); }

@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /*
- * Genera las páginas estáticas de producto (productos/<id>.html), sitemap.xml y robots.txt
- * a partir de js/products.js.
+ * Genera las páginas estáticas de producto (productos/<id>.html), sitemap.xml, robots.txt y
+ * la ruta base de 404.html a partir de js/products.js.
  *
  * Por qué existe: WhatsApp, Instagram y Facebook no ejecutan JavaScript al armar la vista
  * previa de un link, así que cada producto necesita su propio HTML con título, descripción
@@ -165,7 +165,22 @@ ${urls.map(([u, pr]) => `  <url>\n    <loc>${SITE}${u}</loc>\n    <priority>${pr
 `);
 console.log(`sitemap.xml con ${urls.length} direcciones`);
 
-// 3) robots.txt
+// 3) 404.html: GitHub Pages la muestra para cualquier dirección que no existe, también dentro de
+//    carpetas (/carpeta/x). Con rutas relativas los estilos y enlaces se rompían; <base> las fija
+//    a la carpeta del sitio.
+const basePath = new URL(SITE).pathname;
+const page404 = read("404.html")
+  .replace(/ {2}<!-- Lo escribe scripts\/generar-paginas\.js[^\n]*\n/g, "")
+  .replace(/ {2}<base href="[^"]*">\n/g, "");
+const base404 = page404.replace(
+  '  <meta charset="UTF-8">\n',
+  `  <meta charset="UTF-8">\n  <!-- Lo escribe scripts/generar-paginas.js según CONFIG.siteUrl -->\n  <base href="${basePath}">\n`
+);
+if (!base404.includes(`<base href="${basePath}">`)) { throw new Error("No pude escribir <base> en 404.html"); }
+write("404.html", base404);
+console.log(`404.html con <base href="${basePath}">`);
+
+// 4) robots.txt
 write("robots.txt", `User-agent: *
 Allow: /
 

@@ -4,7 +4,7 @@ CAPRICIOSA.CONFIG = {
   brand: "Capricciosa",
   // Dirección pública del sitio (con / al final). Si cambia el dominio, cambiala acá y corré
   // "node scripts/generar-paginas.js" (ver README).
-  siteUrl: "https://sebastiancr1324-sketch.github.io/Capricciosa.github.io/",
+  siteUrl: "https://sebastiancr1324-sketch.github.io/Capricciosa/",
   whatsapp: "5491168351885",
   phone: "(11) 6835 1885",
   // Formato internacional para llamar a un celular argentino: +54 9 11 ...

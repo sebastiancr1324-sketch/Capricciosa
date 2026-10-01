@@ -70,7 +70,7 @@
       '  <div class="footer-grid">' +
       '    <div class="footer-brand">' +
       '      <div class="footer-brand-lockup">' +
-      '        <img class="footer-logo" src="' + esc(cfg.logoFull) + '" alt="Capricciosa" width="500" height="500" loading="lazy" onerror="this.style.display=\'none\';var n=this.closest(\'.footer-brand\').querySelector(\'.brand-name\');if(n){n.style.display=\'inline\'}this.removeAttribute(\'onerror\')">' +
+      '        <img class="footer-logo" src="' + esc(cfg.logoFull) + '" alt="Capricciosa" width="500" height="500" onerror="this.style.display=\'none\';var n=this.closest(\'.footer-brand\').querySelector(\'.brand-name\');if(n){n.style.display=\'inline\'}this.removeAttribute(\'onerror\')">' +
       '        <span class="brand-stamp footer-stamp" aria-hidden="true"><img src="img/EstampaVenezuela.webp" alt="" width="324" height="420" loading="lazy" onerror="this.parentElement.style.display=\'none\'"></span>' +
       '      </div>' +
       '      <span class="brand-name">Capricciosa</span>' +

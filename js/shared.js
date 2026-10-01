@@ -81,7 +81,7 @@
       '    <div>' +
       '      <h2>Contacto</h2>' +
       '      <ul>' +
-      '        <li>' + deco("📞") + ' <a href="tel:+541168351885">' + esc(cfg.phone) + '</a></li>' +
+      '        <li>' + deco("📞") + ' <a href="tel:' + cfg.phoneTel + '">' + esc(cfg.phone) + '</a></li>' +
       '        <li>' + deco("🎂") + ' <a href="https://wa.me/' + cfg.whatsapp + '" target="_blank" rel="noopener noreferrer">WhatsApp</a></li>' +
       '        <li>' + deco("📸") + ' <a href="' + cfg.instagramUrl + '" target="_blank" rel="noopener noreferrer">@' + esc(cfg.instagram) + '</a></li>' +
       '      </ul>' +

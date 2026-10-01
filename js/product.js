@@ -91,7 +91,7 @@
       (product.price ? '<button type="button" class="btn btn-ghost add-inline" data-cart-add="' + esc(product.id) + '">🛒 Agregar al carrito</button>' : '') +
       '<a class="btn btn-wa" target="_blank" rel="noopener noreferrer" href="' + helpers.waOrderLink(product) + '">' +
       waIcon + 'Pedir por WhatsApp</a>' +
-      '<p style="margin-top:18px;font-size:0.95rem;color:var(--ink)">También podés escribirnos a <a href="tel:+541168351885"><strong>' + esc(CAPRICIOSA.CONFIG.phone) + '</strong></a> o por <a href="' + CAPRICIOSA.CONFIG.instagramUrl + '" target="_blank" rel="noopener noreferrer">Instagram</a>.</p>';
+      '<p style="margin-top:18px;font-size:0.95rem;color:var(--ink)">También podés escribirnos a <a href="tel:' + CAPRICIOSA.CONFIG.phoneTel + '"><strong>' + esc(CAPRICIOSA.CONFIG.phone) + '</strong></a> o por <a href="' + CAPRICIOSA.CONFIG.instagramUrl + '" target="_blank" rel="noopener noreferrer">Instagram</a>.</p>';
   }
 
   var relatedBox = document.getElementById("related-grid");

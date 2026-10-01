@@ -4,6 +4,8 @@ CAPRICIOSA.CONFIG = {
   brand: "Capricciosa",
   whatsapp: "5491168351885",
   phone: "(11) 6835 1885",
+  // Formato internacional para llamar a un celular argentino: +54 9 11 ...
+  phoneTel: "+5491168351885",
   instagram: "capricciosa_ve",
   instagramUrl: "https://www.instagram.com/capricciosa_ve",
   location: "Pickup y envíos · San Cristóbal, CABA",

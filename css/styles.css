@@ -35,7 +35,12 @@
 /* ---------- Base ---------- */
 * { box-sizing: border-box; }
 
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+  /* Al saltar a #menu, #pedir o #contacto, que el header fijo (≈76 px) no tape el título.
+     Solo suma lo que le falta al padding superior de la sección (en escritorio queda en 0). */
+  scroll-padding-top: max(0px, 92px - clamp(56px, 8vw, 96px));
+}
 
 body {
   margin: 0;
@@ -797,7 +802,7 @@ a { color: inherit; }
   margin: 4px 0 0;
 }
 
-.site-footer h3 { color: #fff; font-size: 1.15rem; margin-bottom: 12px; }
+.site-footer h2 { color: #fff; font-size: 1.15rem; margin-bottom: 12px; }
 .site-footer ul { list-style: none; margin: 0; padding: 0; }
 .site-footer li { margin-bottom: 8px; font-weight: 600; }
 .site-footer a { color: var(--cream); font-weight: 700; }
@@ -891,7 +896,7 @@ a { color: inherit; }
   margin: 16px 0 22px;
 }
 
-.product-hero .chip-row span {
+.product-hero .chip-row > span {
   font-family: var(--font-display);
   font-weight: 600;
   font-size: 0.9rem;
@@ -938,7 +943,7 @@ a { color: inherit; }
   justify-content: center;
 }
 
-.detail-card h3 { font-size: 1.35rem; margin-bottom: 12px; }
+.detail-card h2 { font-size: 1.35rem; margin-bottom: 12px; }
 .detail-card p { margin: 0 0 10px; font-weight: 600; color: var(--ink); }
 
 .kw-list { display: flex; flex-wrap: wrap; gap: 8px; }
@@ -1199,7 +1204,7 @@ a { color: inherit; }
   padding: 20px 22px;
   border-bottom: 2px dashed color-mix(in srgb, var(--cocoa) 25%, transparent);
 }
-.cart-head h3 { font-size: 1.5rem; }
+.cart-head h2 { font-size: 1.5rem; }
 
 .cart-close {
   width: 38px;

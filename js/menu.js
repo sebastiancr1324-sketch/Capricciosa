@@ -44,7 +44,8 @@
   allBtn.type = "button";
   allBtn.className = "chip active";
   allBtn.dataset.cat = "all";
-  allBtn.textContent = "Todo el menú 🎂";
+  allBtn.setAttribute("aria-pressed", "true");
+  allBtn.innerHTML = 'Todo el menú <span aria-hidden="true">🎂</span>';
   wrap.appendChild(allBtn);
 
   keys.forEach(function (key) {
@@ -52,6 +53,7 @@
     btn.type = "button";
     btn.className = "chip";
     btn.dataset.cat = key;
+    btn.setAttribute("aria-pressed", "false");
     btn.textContent = CAT[key].label;
     wrap.appendChild(btn);
   });
@@ -68,8 +70,13 @@
   wrap.addEventListener("click", function (e) {
     var btn = e.target.closest(".chip");
     if (!btn) return;
-    wrap.querySelectorAll(".chip").forEach(function (c) { c.classList.remove("active"); });
+    // aria-pressed le dice al lector de pantalla qué filtro está activo
+    wrap.querySelectorAll(".chip").forEach(function (c) {
+      c.classList.remove("active");
+      c.setAttribute("aria-pressed", "false");
+    });
     btn.classList.add("active");
+    btn.setAttribute("aria-pressed", "true");
     applyFilter(btn.dataset.cat);
   });
 })();

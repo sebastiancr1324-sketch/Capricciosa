@@ -304,6 +304,10 @@ CAPRICIOSA.helpers = {
   formatARS: function (n) {
     return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ".");
   },
+  // Emoji decorativo: se ve igual pero el lector de pantalla no lo lee
+  deco: function (emoji) {
+    return '<span aria-hidden="true">' + emoji + '</span>';
+  },
   escapeHtml: function (str) {
     return String(str).replace(/[&<>"']/g, function (c) {
       return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];

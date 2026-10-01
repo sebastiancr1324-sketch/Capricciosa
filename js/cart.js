@@ -179,7 +179,7 @@
     if (!ids.length) {
       bodyEl.innerHTML =
         '<div class="cart-empty">' +
-        '  <div class="ce-emoji">🍩</div>' +
+        '  <div class="ce-emoji" aria-hidden="true">🍩</div>' +
         '  <h3 style="font-size:1.25rem;margin-bottom:6px">Tu carrito está vacío</h3>' +
         '  <p style="font-weight:600;color:var(--ink)">Agregá tus capriccitos favoritos y armá tu pedido.</p>' +
         '</div>';
@@ -193,7 +193,7 @@
         var lineTotal = price ? p.priceNote + " " + helpers.formatARS(price * qty) : p.priceNote;
         html +=
           '<div class="cart-item">' +
-          '  <span class="ci-emoji">' + (p.emoji || "🍰") + '</span>' +
+          '  <span class="ci-emoji" aria-hidden="true">' + (p.emoji || "🍰") + '</span>' +
           '  <div class="ci-info">' +
           '    <span class="ci-name">' + esc(p.name) + '</span>' +
           '    <span class="ci-unit">' + esc(p.priceNote) + ' ' + esc(p.price) + ' c/u</span>' +
@@ -229,15 +229,15 @@
     var rootEl = document.createElement("div");
     rootEl.innerHTML =
       '<button type="button" class="cart-fab" data-cart-open aria-label="Abrir tu pedido">' +
-      '  🛒' +
+      '  <span aria-hidden="true">🛒</span>' +
       '  <span class="cart-badge hidden" data-cart-badge>0</span>' +
       '</button>' +
       '<div class="cart-overlay" data-cart-close></div>' +
-      '<aside class="cart-drawer" data-cart-drawer role="dialog" aria-modal="true" aria-label="Tu pedido">' +
+      '<aside class="cart-drawer" data-cart-drawer role="dialog" aria-modal="true" aria-labelledby="cart-title">' +
       '  <div class="cart-head">' +
       '    <div>' +
       '      <span class="section-eyebrow">Carrito</span>' +
-      '      <h3>Tu pedido 🍰</h3>' +
+      '      <h2 id="cart-title">Tu pedido <span aria-hidden="true">🍰</span></h2>' +
       '    </div>' +
       '    <button type="button" class="cart-close" data-cart-close aria-label="Cerrar">✕</button>' +
       '  </div>' +
@@ -247,7 +247,7 @@
       '      <span>Subtotal</span>' +
       '      <span class="cart-total-value" data-cart-total>ARS 0</span>' +
       '    </div>' +
-      '    <a class="btn btn-wa cart-checkout" data-cart-checkout target="_blank" rel="noopener">' +
+      '    <a class="btn btn-wa cart-checkout" data-cart-checkout target="_blank" rel="noopener noreferrer">' +
       waIcon() + 'Pedir por WhatsApp' +
       '    </a>' +
       '    <button type="button" class="cart-clear" data-cart-clear>Vaciar carrito</button>' +

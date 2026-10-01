@@ -3,6 +3,7 @@
   var CAT = CAPRICIOSA.CATEGORIES;
   var PRODUCTS = CAPRICIOSA.PRODUCTS;
   var esc = helpers.escapeHtml;
+  var deco = helpers.deco;
 
   var params = new URLSearchParams(window.location.search);
   var id = params.get("producto");
@@ -30,13 +31,13 @@
   var cat = CAT[product.category] || { label: "", color: "#FD97D6" };
   var priceLabel = esc(helpers.formatPrice(product));
   var specs = [];
-  if (product.size) { specs.push("⚖ " + product.size); }
-  if (product.dimensions) { specs.push("📐 " + product.dimensions); }
-  if (product.portions) { specs.push("🍰 " + product.portions); }
+  if (product.size) { specs.push(["⚖", product.size]); }
+  if (product.dimensions) { specs.push(["📐", product.dimensions]); }
+  if (product.portions) { specs.push(["🍰", product.portions]); }
   var specChips = specs.map(function (s) {
-    return '<span class="kw-chip">' + esc(s) + '</span>';
+    return '<span class="kw-chip">' + deco(s[0]) + ' ' + esc(s[1]) + '</span>';
   }).join("");
-  var aboutTitle = product.category === "bebidas" ? "🥤 Sobre esta bebida" : "📖 Sobre esta torta";
+  var aboutTitle = product.category === "bebidas" ? deco("🥤") + " Sobre esta bebida" : deco("📖") + " Sobre esta torta";
 
   document.title = product.name + " · Capricciosa";
 
@@ -52,9 +53,9 @@
       '<div class="product-hero-left">' +
       '  <a class="crumb" href="index.html">← Volver al menú</a>' +
       '  <div class="chip-row">' +
-      '    <span>🏷 ' + esc(cat.label) + '</span>' +
-      '    <span>🍽 ' + esc(product.subtitle) + '</span>' +
-      (product.size ? '    <span>⚖ ' + esc(product.size) + '</span>' : "") +
+      '    <span>' + deco("🏷") + ' ' + esc(cat.label) + '</span>' +
+      '    <span>' + deco("🍽") + ' ' + esc(product.subtitle) + '</span>' +
+      (product.size ? '    <span>' + deco("⚖") + ' ' + esc(product.size) + '</span>' : "") +
       '  </div>' +
       '  <h1>' + esc(product.name) + '</h1>' +
       '  <p class="desc">' + esc(product.description) + '</p>' +
@@ -75,22 +76,22 @@
   var detail = document.getElementById("detail-card");
   if (detail) {
     detail.innerHTML =
-      '<h3>' + aboutTitle + '</h3>' +
+      '<h2>' + aboutTitle + '</h2>' +
       '<p>' + esc(product.description) + '</p>' +
-      '<h3 style="margin-top:24px">📏 Tamaño y peso</h3>' +
+      '<h2 style="margin-top:24px">' + deco("📏") + ' Tamaño y peso</h2>' +
       '<div class="kw-list">' + specChips + '</div>';
   }
 
   var waPanel = document.getElementById("wa-panel");
   if (waPanel) {
     waPanel.innerHTML =
-      '<div class="wa-emoji">💬</div>' +
-      '<h3>¿Te lo llevás?</h3>' +
+      '<div class="wa-emoji" aria-hidden="true">💬</div>' +
+      '<h2>¿Te lo llevás?</h2>' +
       '<p>Contanos qué querés y coordinamos el <strong>pickup</strong> o el <strong>envío</strong> en San Cristóbal, CABA.</p>' +
       (product.price ? '<button type="button" class="btn btn-ghost add-inline" data-cart-add="' + esc(product.id) + '">🛒 Agregar al carrito</button>' : '') +
-      '<a class="btn btn-wa" target="_blank" rel="noopener" href="' + helpers.waOrderLink(product) + '">' +
+      '<a class="btn btn-wa" target="_blank" rel="noopener noreferrer" href="' + helpers.waOrderLink(product) + '">' +
       waIcon + 'Pedir por WhatsApp</a>' +
-      '<p style="margin-top:18px;font-size:0.95rem;color:var(--ink)">También podés escribirnos a <a href="tel:+541168351885"><strong>' + esc(CAPRICIOSA.CONFIG.phone) + '</strong></a> o por <a href="' + CAPRICIOSA.CONFIG.instagramUrl + '" target="_blank" rel="noopener">Instagram</a>.</p>';
+      '<p style="margin-top:18px;font-size:0.95rem;color:var(--ink)">También podés escribirnos a <a href="tel:+541168351885"><strong>' + esc(CAPRICIOSA.CONFIG.phone) + '</strong></a> o por <a href="' + CAPRICIOSA.CONFIG.instagramUrl + '" target="_blank" rel="noopener noreferrer">Instagram</a>.</p>';
   }
 
   var relatedBox = document.getElementById("related-grid");

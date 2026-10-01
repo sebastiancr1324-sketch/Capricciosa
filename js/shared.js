@@ -1,6 +1,7 @@
 (function () {
   var cfg = CAPRICIOSA.CONFIG;
   var esc = CAPRICIOSA.helpers.escapeHtml;
+  var deco = CAPRICIOSA.helpers.deco;
 
   var favicon = "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍰</text></svg>";
 
@@ -78,18 +79,18 @@
       '      <p>Postres artesanales hechos con amor y un toque venezolano.</p>' +
       '    </div>' +
       '    <div>' +
-      '      <h3>Contacto</h3>' +
+      '      <h2>Contacto</h2>' +
       '      <ul>' +
-      '        <li>📞 <a href="tel:+541168351885">' + esc(cfg.phone) + '</a></li>' +
-      '        <li>🎂 <a href="https://wa.me/' + cfg.whatsapp + '" target="_blank" rel="noopener">WhatsApp</a></li>' +
-      '        <li>📸 <a href="' + cfg.instagramUrl + '" target="_blank" rel="noopener">@' + esc(cfg.instagram) + '</a></li>' +
+      '        <li>' + deco("📞") + ' <a href="tel:+541168351885">' + esc(cfg.phone) + '</a></li>' +
+      '        <li>' + deco("🎂") + ' <a href="https://wa.me/' + cfg.whatsapp + '" target="_blank" rel="noopener noreferrer">WhatsApp</a></li>' +
+      '        <li>' + deco("📸") + ' <a href="' + cfg.instagramUrl + '" target="_blank" rel="noopener noreferrer">@' + esc(cfg.instagram) + '</a></li>' +
       '      </ul>' +
       '    </div>' +
       '    <div>' +
-      '      <h3>Retiro y envíos</h3>' +
+      '      <h2>Retiro y envíos</h2>' +
       '      <ul>' +
-      '        <li>📍 ' + esc(cfg.location) + '</li>' +
-      '        <li>🧁 Pickup y envíos coordinados</li>' +
+      '        <li>' + deco("📍") + ' ' + esc(cfg.location) + '</li>' +
+      '        <li>' + deco("🧁") + ' Pickup y envíos coordinados</li>' +
       '      </ul>' +
       '    </div>' +
       '  </div>' +

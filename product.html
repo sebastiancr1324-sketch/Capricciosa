@@ -1,56 +1,20 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
   <title>Capricciosa · Postres artesanales</title>
-  <meta name="description" content="Tortas marquesas, nuvole y tres leches artesanales. Elegí tu postre y pedilo por WhatsApp.">
-  <link rel="icon" type="image/png" sizes="48x48" href="img/favicon-48.png">
-  <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
-  <meta property="og:title" content="Capricciosa · Postres artesanales">
-  <meta property="og:description" content="Tortas marquesas, nuvole y tres leches artesanales. Elegí tu postre y pedilo por WhatsApp.">
-  <meta property="og:type" content="website">
-  <meta property="og:image" content="img/CapricciosaLogoCompleto.jpg">
-  <meta name="theme-color" content="#FFDFEF">
-  <link rel="preload" href="fonts/anton-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="fonts/nunito-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="css/styles.css">
+  <!-- Dirección vieja (product.html?producto=...): lleva a la página nueva del producto en productos/ -->
+  <script>
+    (function () {
+      var id = new URLSearchParams(location.search).get("producto");
+      location.replace(id && /^[a-z0-9-]+$/.test(id) ? "productos/" + id + ".html" : "index.html#menu");
+    })();
+  </script>
+  <noscript><meta http-equiv="refresh" content="0; url=index.html#menu"></noscript>
 </head>
 <body>
-
-  <header class="site-header" id="cabecera"></header>
-
-  <main>
-    <!-- Product hero (rendered by JS) -->
-    <section class="product-hero">
-      <div class="container" id="product-hero"></div>
-    </section>
-
-    <!-- Details -->
-    <section class="section bone" id="product-detail">
-      <div class="container product-detail">
-        <div class="detail-card" id="detail-card"></div>
-        <div class="detail-card wa-panel" id="wa-panel"></div>
-      </div>
-    </section>
-
-    <!-- Related -->
-    <section class="section bone" id="related">
-      <div class="container">
-        <div class="section-head">
-          <span class="section-eyebrow">Seguro que también te gustan</span>
-          <h2>Más capriccitos</h2>
-        </div>
-        <div class="related-grid" id="related-grid"></div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="site-footer" id="contacto"></footer>
-
-  <script src="js/products.js"></script>
-  <script src="js/shared.js"></script>
-  <script src="js/cart.js"></script>
-  <script src="js/product.js"></script>
+  <p><a href="index.html#menu">Ver el menú de Capricciosa</a></p>
 </body>
 </html>

@@ -952,6 +952,10 @@ a { color: inherit; }
   align-items: center;
 }
 
+/* Versión sin JavaScript de la página de producto (ocupa todo el ancho de la grilla) */
+.product-hero noscript { grid-column: 1 / -1; }
+.noscript-box { display: grid; justify-items: start; gap: 14px; }
+
 .product-hero-right {
   display: grid;
   gap: 24px;

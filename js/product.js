@@ -5,8 +5,8 @@
   var esc = helpers.escapeHtml;
   var deco = helpers.deco;
 
-  var params = new URLSearchParams(window.location.search);
-  var id = params.get("producto");
+  // Cada página de productos/ trae su id en <body data-producto="...">
+  var id = document.body.getAttribute("data-producto") || new URLSearchParams(window.location.search).get("producto");
   var product = helpers.getProduct(id);
 
   var hero = document.getElementById("product-hero");

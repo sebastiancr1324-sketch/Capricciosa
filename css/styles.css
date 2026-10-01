@@ -178,9 +178,11 @@ a { color: inherit; }
   opacity: 0;
   transform: translateY(-8px);
   pointer-events: none;
-  transition: opacity 0.25s var(--ease), transform 0.25s var(--ease);
+  /* visibility: hidden lo saca del Tab y de los lectores de pantalla cuando está cerrado */
+  visibility: hidden;
+  transition: opacity 0.25s var(--ease), transform 0.25s var(--ease), visibility 0s linear 0.25s;
 }
-.mobile-nav.open { opacity: 1; transform: translateY(0); pointer-events: auto; }
+.mobile-nav.open { opacity: 1; transform: translateY(0); pointer-events: auto; visibility: visible; transition-delay: 0s; }
 
 .mobile-nav ul {
   list-style: none;
@@ -1183,9 +1185,11 @@ a { color: inherit; }
   display: flex;
   flex-direction: column;
   transform: translateX(102%);
-  transition: transform 0.32s var(--ease);
+  /* Cerrado: oculto para el teclado, los lectores de pantalla y sin sombra asomando por el borde */
+  visibility: hidden;
+  transition: transform 0.32s var(--ease), visibility 0s linear 0.32s;
 }
-.cart-drawer.open { transform: translateX(0); }
+.cart-drawer.open { transform: translateX(0); visibility: visible; transition-delay: 0s; }
 
 .cart-head {
   display: flex;

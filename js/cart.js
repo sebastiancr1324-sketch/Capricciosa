@@ -80,16 +80,50 @@
     render();
   }
 
+  var lastFocus = null;
+
+  function isOpen() {
+    return drawer.classList.contains("open");
+  }
+
+  function focusables() {
+    return Array.prototype.filter.call(
+      drawer.querySelectorAll("a[href], button:not([disabled])"),
+      function (el) { return el.offsetWidth > 0 || el.offsetHeight > 0; }
+    );
+  }
+
   function open() {
+    lastFocus = document.activeElement;
     overlay.classList.add("open");
     drawer.classList.add("open");
     document.body.classList.add("no-scroll");
+    drawer.querySelector(".cart-close").focus();
   }
 
   function close() {
+    if (!isOpen()) { return; }
     overlay.classList.remove("open");
     drawer.classList.remove("open");
     document.body.classList.remove("no-scroll");
+    // Devuelve el foco a quien abrió el carrito (normalmente el botón 🛒)
+    if (lastFocus && document.contains(lastFocus)) { lastFocus.focus(); }
+    lastFocus = null;
+  }
+
+  // Mientras el carrito está abierto, Tab y Shift+Tab recorren solo el panel
+  function trapTab(e) {
+    var items = focusables();
+    if (!items.length) { return; }
+    var first = items[0];
+    var last = items[items.length - 1];
+    if (e.shiftKey && (document.activeElement === first || !drawer.contains(document.activeElement))) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && (document.activeElement === last || !drawer.contains(document.activeElement))) {
+      e.preventDefault();
+      first.focus();
+    }
   }
 
   function flash(btn) {
@@ -181,7 +215,14 @@
     badge.classList.toggle("hidden", n === 0);
     totalEl.textContent = priceNote() + " " + helpers.formatARS(total());
     checkoutEl.classList.toggle("disabled", n === 0);
-    checkoutEl.href = n ? waLink() : "#";
+    // Sin productos el enlace no tiene destino: sin href tampoco se puede enfocar ni abrir con Enter
+    if (n) {
+      checkoutEl.href = waLink();
+      checkoutEl.removeAttribute("aria-disabled");
+    } else {
+      checkoutEl.removeAttribute("href");
+      checkoutEl.setAttribute("aria-disabled", "true");
+    }
   }
 
   function buildDOM() {
@@ -206,7 +247,7 @@
       '      <span>Subtotal</span>' +
       '      <span class="cart-total-value" data-cart-total>ARS 0</span>' +
       '    </div>' +
-      '    <a class="btn btn-wa cart-checkout" data-cart-checkout href="#" target="_blank" rel="noopener">' +
+      '    <a class="btn btn-wa cart-checkout" data-cart-checkout target="_blank" rel="noopener">' +
       waIcon() + 'Pedir por WhatsApp' +
       '    </a>' +
       '    <button type="button" class="cart-clear" data-cart-clear>Vaciar carrito</button>' +
@@ -255,7 +296,9 @@
   });
 
   document.addEventListener("keydown", function (e) {
+    if (!isOpen()) { return; }
     if (e.key === "Escape") { close(); }
+    if (e.key === "Tab") { trapTab(e); }
   });
 
   buildDOM();

@@ -39,31 +39,27 @@
     var toggle = header.querySelector(".nav-toggle");
     var mNav = header.querySelector(".mobile-nav");
     if (toggle && mNav) {
+      var closeMenu = function (returnFocus) {
+        // El menú cerrado deja de ser enfocable: si el foco estaba adentro, vuelve al botón
+        var hadFocus = mNav.contains(document.activeElement);
+        mNav.classList.remove("open");
+        toggle.setAttribute("aria-expanded", "false");
+        toggle.setAttribute("aria-label", "Abrir menú");
+        if (returnFocus && hadFocus) { toggle.focus(); }
+      };
       toggle.addEventListener("click", function () {
         var open = mNav.classList.toggle("open");
         toggle.setAttribute("aria-expanded", open ? "true" : "false");
         toggle.setAttribute("aria-label", open ? "Cerrar menú" : "Abrir menú");
       });
       mNav.addEventListener("click", function (e) {
-        if (e.target.closest("a")) {
-          mNav.classList.remove("open");
-          toggle.setAttribute("aria-expanded", "false");
-          toggle.setAttribute("aria-label", "Abrir menú");
-        }
+        if (e.target.closest("a")) { closeMenu(); }
       });
       document.addEventListener("click", function (e) {
-        if (mNav.classList.contains("open") && !header.contains(e.target)) {
-          mNav.classList.remove("open");
-          toggle.setAttribute("aria-expanded", "false");
-          toggle.setAttribute("aria-label", "Abrir menú");
-        }
+        if (mNav.classList.contains("open") && !header.contains(e.target)) { closeMenu(); }
       });
       document.addEventListener("keydown", function (e) {
-        if (e.key === "Escape" && mNav.classList.contains("open")) {
-          mNav.classList.remove("open");
-          toggle.setAttribute("aria-expanded", "false");
-          toggle.setAttribute("aria-label", "Abrir menú");
-        }
+        if (e.key === "Escape" && mNav.classList.contains("open")) { closeMenu(true); }
       });
     }
   }

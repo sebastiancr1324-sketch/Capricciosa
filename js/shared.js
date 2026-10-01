@@ -3,8 +3,6 @@
   var esc = CAPRICIOSA.helpers.escapeHtml;
   var deco = CAPRICIOSA.helpers.deco;
 
-  var favicon = "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍰</text></svg>";
-
   var navLinks = [
     { href: "index.html", label: "Inicio" },
     { href: "index.html#menu", label: "Menú" },
@@ -25,7 +23,7 @@
     header.innerHTML =
       '<div class="container header-inner">' +
       '  <a class="brand" href="index.html">' +
-      '    <img class="brand-logo" src="' + esc(cfg.logoMinimal) + '" alt="Capricciosa" onerror="this.style.display=\'none\';this.parentElement.querySelector(\'.brand-name\').style.display=\'inline\';this.removeAttribute(\'onerror\')">' +
+      '    <img class="brand-logo" src="' + esc(cfg.logoMinimal) + '" alt="Capricciosa" width="500" height="500" onerror="this.style.display=\'none\';this.parentElement.querySelector(\'.brand-name\').style.display=\'inline\';this.removeAttribute(\'onerror\')">' +
       '    <span class="brand-name">Capricciosa</span>' +
       '  </a>' +
       '  <button type="button" class="nav-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-nav">' +
@@ -72,8 +70,8 @@
       '  <div class="footer-grid">' +
       '    <div class="footer-brand">' +
       '      <div class="footer-brand-lockup">' +
-      '        <img class="footer-logo" src="' + esc(cfg.logoFull) + '" alt="Capricciosa" onerror="this.style.display=\'none\';var n=this.closest(\'.footer-brand\').querySelector(\'.brand-name\');if(n){n.style.display=\'inline\'}this.removeAttribute(\'onerror\')">' +
-      '        <span class="brand-stamp footer-stamp" aria-hidden="true"><img src="img/EstampaVenezuela.jpg" alt="" onerror="this.parentElement.style.display=\'none\'"></span>' +
+      '        <img class="footer-logo" src="' + esc(cfg.logoFull) + '" alt="Capricciosa" width="500" height="500" loading="lazy" onerror="this.style.display=\'none\';var n=this.closest(\'.footer-brand\').querySelector(\'.brand-name\');if(n){n.style.display=\'inline\'}this.removeAttribute(\'onerror\')">' +
+      '        <span class="brand-stamp footer-stamp" aria-hidden="true"><img src="img/EstampaVenezuela.webp" alt="" width="324" height="420" loading="lazy" onerror="this.parentElement.style.display=\'none\'"></span>' +
       '      </div>' +
       '      <span class="brand-name">Capricciosa</span>' +
       '      <p>Postres artesanales hechos con amor y un toque venezolano.</p>' +
@@ -113,13 +111,4 @@
 
   var cta = document.getElementById("cta-wa");
   if (cta) { cta.href = CAPRICIOSA.helpers.waGeneralLink(); }
-
-  var probe = new Image();
-  probe.onerror = function () {
-    var links = document.querySelectorAll('link[rel="icon"]');
-    for (var i = 0; i < links.length; i++) {
-      links[i].href = favicon;
-    }
-  };
-  probe.src = cfg.logoMinimal;
 })();

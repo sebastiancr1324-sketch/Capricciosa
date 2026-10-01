@@ -62,8 +62,8 @@
       '</div>' +
       '<div class="product-hero-right">' +
       '  <div class="product-hero-img-wrap">' +
-      '    <img class="product-hero-img" src="' + esc(product.image) + '" alt="Foto de ' + esc(product.name) + '" data-pid="' + esc(product.id) + '" onerror="capriciosaImg(this)">' +
-      '    <span class="brand-stamp hero-stamp" aria-hidden="true"><img src="img/EstampaVenezuela.jpg" alt="" onerror="this.parentElement.style.display=\'none\'"></span>' +
+      '    <img class="product-hero-img" src="' + esc(helpers.photo(product)) + '" fetchpriority="high" alt="Foto de ' + esc(product.name) + '" data-pid="' + esc(product.id) + '" onerror="capriciosaImg(this)">' +
+      '    <span class="brand-stamp hero-stamp" aria-hidden="true"><img src="img/EstampaVenezuela.webp" alt="" width="324" height="420" loading="lazy" onerror="this.parentElement.style.display=\'none\'"></span>' +
       '  </div>' +
       '  <div class="hero-price">' +
       '    <span class="note">' + esc(product.priceNote) + '</span>' +
@@ -115,7 +115,7 @@
         a.href = helpers.productUrl(p.id);
         a.innerHTML =
           '<div class="card-img">' +
-          '  <img src="' + esc(p.image) + '" alt="Foto de ' + esc(p.name) + '" loading="lazy" data-pid="' + esc(p.id) + '" onerror="capriciosaImg(this)">' +
+          '  <img src="' + esc(helpers.photo(p)) + '" alt="Foto de ' + esc(p.name) + '" loading="lazy" data-pid="' + esc(p.id) + '" onerror="capriciosaImg(this)">' +
           '</div>' +
           '<div class="card-body">' +
           '  <div class="card-top">' +

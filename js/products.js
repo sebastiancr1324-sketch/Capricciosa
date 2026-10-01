@@ -9,8 +9,8 @@ CAPRICIOSA.CONFIG = {
   instagram: "capricciosa_ve",
   instagramUrl: "https://www.instagram.com/capricciosa_ve",
   location: "Pickup y envíos · San Cristóbal, CABA",
-  logoMinimal: "img/CapricciosaMinimalistaLogo.jpg",
-  logoFull: "img/CapricciosaLogoCompleto.jpg"
+  logoMinimal: "img/CapricciosaMinimalistaLogo.webp",
+  logoFull: "img/CapricciosaLogoCompleto.webp"
 };
 
 CAPRICIOSA.CATEGORIES = {
@@ -265,6 +265,10 @@ CAPRICIOSA.helpers = {
   getProduct: function (id) {
     return CAPRICIOSA.PRODUCTS.find(function (p) { return p.id === id; });
   },
+  // Foto que se muestra: la versión .webp (pesa la mitad). Si falta, capriciosaImg usa el JPEG original
+  photo: function (product) {
+    return product.image.replace(/\.(jpe?g|png)$/i, ".webp");
+  },
   productUrl: function (id) {
     return "product.html?producto=" + encodeURIComponent(id);
   },
@@ -317,26 +321,15 @@ CAPRICIOSA.helpers = {
   }
 };
 
+// Si la foto no carga: primero prueba el JPEG original y, si tampoco está, muestra un dibujo de reserva
 window.capriciosaImg = function (img) {
   var p = img && img.dataset ? CAPRICIOSA.helpers.getProduct(img.dataset.pid) : null;
-  if (img) {
-    img.onerror = null;
-    if (p) { img.src = CAPRICIOSA.helpers.imgPlaceholder(p); }
+  if (!img || !p) { return; }
+  if (!img.dataset.fallback && img.getAttribute("src") !== p.image) {
+    img.dataset.fallback = "1";
+    img.src = p.image;
+    return;
   }
+  img.onerror = null;
+  img.src = CAPRICIOSA.helpers.imgPlaceholder(p);
 };
-
-window.CAPRICIOSA.imgSweep = function () {
-  var imgs = document.querySelectorAll("img[data-pid]");
-  for (var i = 0; i < imgs.length; i++) {
-    var img = imgs[i];
-    if (img.src.indexOf("data:image/svg") === 0) { continue; }
-    if (img.complete && img.naturalWidth === 0) {
-      window.capriciosaImg(img);
-    } else if (!img.complete) {
-      img.addEventListener("error", function () { window.capriciosaImg(this); });
-    }
-  }
-};
-
-window.addEventListener("load", window.CAPRICIOSA.imgSweep);
-setTimeout(window.CAPRICIOSA.imgSweep, 2500);

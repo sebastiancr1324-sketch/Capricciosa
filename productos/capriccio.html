@@ -22,33 +22,22 @@
   <meta property="og:image:alt" content="Foto de Capriccio">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="theme-color" content="#FFDFEF">
-  <link rel="preload" href="img/Capriccio.webp" as="image" type="image/webp" fetchpriority="high">
   <link rel="stylesheet" href="css/styles.css">
 </head>
-<body data-producto="capriccio">
+<body data-producto="capriccio" data-firma="glspjd">
 
   <header class="site-header" id="cabecera"></header>
 
   <main>
-    <!-- Lo dibuja js/product.js con los datos de js/products.js -->
+    <!-- Contenido armado con js/product.js; si products.js cambia, el navegador lo vuelve a dibujar -->
     <section class="product-hero">
-      <div class="container" id="product-hero">
-        <noscript>
-          <div class="noscript-box">
-            <a class="crumb" href="index.html#menu">← Volver al menú</a>
-            <h1>Capriccio</h1>
-            <p class="desc">Clásica torta marquesa venezolana elaborada con capas de galletas y una cremosa mezcla de chocolate.</p>
-            <p class="desc"><strong>ARS 7.000</strong> · Aprox. 700 gr.</p>
-            <a class="btn btn-wa" href="https://wa.me/5491168351885?text=%C2%A1Hola%20Capricciosa!%20%F0%9F%8D%B0%20Quiero%20hacer%20un%20pedido%3A%20Capriccio" target="_blank" rel="noopener noreferrer">Pedir por WhatsApp</a>
-          </div>
-        </noscript>
-      </div>
+      <div class="container" id="product-hero"><div class="product-hero-left">  <a class="crumb" href="index.html">← Volver al menú</a>  <div class="chip-row">    <span><span aria-hidden="true">🏷</span> Clásicos</span>    <span><span aria-hidden="true">🍽</span> Marquesa clásica</span>    <span><span aria-hidden="true">⚖</span> Aprox. 700 gr.</span>  </div>  <h1>Capriccio</h1>  <p class="desc">Clásica torta marquesa venezolana elaborada con capas de galletas y una cremosa mezcla de chocolate.</p></div><div class="product-hero-right">  <div class="product-hero-img-wrap">    <img class="product-hero-img" src="img/Capriccio.webp" fetchpriority="high" alt="Foto de Capriccio" data-pid="capriccio" onerror="capriciosaImg(this)">    <span class="brand-stamp hero-stamp" aria-hidden="true"><img src="img/EstampaVenezuela.webp" alt="" width="324" height="420" loading="lazy" onerror="this.parentElement.style.display='none'"></span>  </div>  <div class="hero-price">    <span class="note">ARS</span><span class="amount">7.000</span><span class="note">Aprox. 700 gr.</span>  </div></div></div>
     </section>
 
     <section class="section bone" id="product-detail">
       <div class="container product-detail">
-        <div class="detail-card" id="detail-card"></div>
-        <div class="detail-card wa-panel" id="wa-panel"></div>
+        <div class="detail-card" id="detail-card"><h2><span aria-hidden="true">📖</span> Sobre esta torta</h2><p>Clásica torta marquesa venezolana elaborada con capas de galletas y una cremosa mezcla de chocolate.</p><h2 style="margin-top:24px"><span aria-hidden="true">📏</span> Tamaño y peso</h2><div class="kw-list"><span class="kw-chip"><span aria-hidden="true">⚖</span> Aprox. 700 gr.</span><span class="kw-chip"><span aria-hidden="true">📐</span> Molde redondo de 18 cm</span><span class="kw-chip"><span aria-hidden="true">🍰</span> 8 porciones</span></div></div>
+        <div class="detail-card wa-panel" id="wa-panel"><div class="wa-emoji" aria-hidden="true">💬</div><h2>¿Te lo llevás?</h2><p>Contanos qué querés y coordinamos el <strong>pickup</strong> o el <strong>envío</strong> en San Cristóbal, CABA.</p><button type="button" class="btn btn-ghost add-inline" data-cart-add="capriccio"><span><span aria-hidden="true">🛒</span> Agregar al carrito</span></button><a class="btn btn-wa" target="_blank" rel="noopener noreferrer" href="https://wa.me/5491168351885?text=%C2%A1Hola%20Capricciosa!%20%F0%9F%8D%B0%20Quiero%20hacer%20un%20pedido%3A%20Capriccio"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2a9.9 9.9 0 0 0-8.4 15.2L2.1 22l4.95-1.5A9.93 9.93 0 1 0 12.04 2Zm5.83 14.13c-.24.69-1.42 1.32-1.98 1.36-.53.04-1.04.17-3.47-.72-2.92-1.07-4.78-3.85-4.93-4.03-.14-.18-1.18-1.57-1.18-2.99 0-1.42.74-2.12 1-2.41.26-.29.58-.36.77-.36h.56c.18 0 .42-.07.66.5.24.58.83 2.01.9 2.15.07.14.12.31.02.5-.09.18-.14.3-.28.46-.14.17-.3.37-.43.5-.14.13-.29.28-.12.55.17.26.75 1.24 1.61 2.01 1.11.99 2.04 1.3 2.33 1.44.3.14.47.12.64-.07.17-.18.73-.85.93-1.15.19-.29.39-.24.65-.14.26.09 1.67.79 1.95.93.29.14.48.21.55.33.07.11.07.65-.17 1.33Z"/></svg>Pedir por WhatsApp</a><p style="margin-top:18px;font-size:0.95rem;color:var(--ink)">También podés escribirnos a <a href="tel:+5491168351885"><strong>(11) 6835 1885</strong></a> o por <a href="https://www.instagram.com/capricciosa_ve" target="_blank" rel="noopener noreferrer">Instagram</a>.</p></div>
       </div>
     </section>
 
@@ -58,7 +47,7 @@
           <span class="section-eyebrow">Seguro que también te gustan</span>
           <h2>Más capriccitos</h2>
         </div>
-        <div class="related-grid" id="related-grid"></div>
+        <div class="related-grid" id="related-grid"><div class="card-wrap"><a class="product-card" href="productos/capriccio-lemon-pie.html"><div class="card-img">  <img src="img/CapriccioLemonPie.webp" alt="Foto de Capriccio Lemon Pie" loading="lazy" data-pid="capriccio-lemon-pie" onerror="capriciosaImg(this)"></div><div class="card-body">  <div class="card-top">    <span class="card-badge">Cítrico</span>    <span class="card-sticker">LP</span>  </div>  <h3>Capriccio Lemon Pie</h3>  <p class="p-desc">Delicada crema de limón con capas de galletas coronada con merengue y limón.</p>  <div class="card-foot">    <span class="price">ARS 7.000</span>    <span class="card-go">Ver detalle →</span>  </div></div></a><button type="button" class="add-btn" data-cart-add="capriccio-lemon-pie" aria-label="Agregar Capriccio Lemon Pie al carrito">+ Agregar</button></div><div class="card-wrap"><a class="product-card" href="productos/capriccio-oreo.html"><div class="card-img">  <img src="img/CapriccioOreo.webp" alt="Foto de Capriccio Oreo" loading="lazy" data-pid="capriccio-oreo" onerror="capriciosaImg(this)"></div><div class="card-body">  <div class="card-top">    <span class="card-badge">Marquesa con topping</span>    <span class="card-sticker">Or</span>  </div>  <h3>Capriccio Oreo</h3>  <p class="p-desc">Clásica torta marquesa venezolana con topping de alfajor de Oreo triple.</p>  <div class="card-foot">    <span class="price">ARS 8.500</span>    <span class="card-go">Ver detalle →</span>  </div></div></a><button type="button" class="add-btn" data-cart-add="capriccio-oreo" aria-label="Agregar Capriccio Oreo al carrito">+ Agregar</button></div><div class="card-wrap"><a class="product-card" href="productos/tres-leches.html"><div class="card-img">  <img src="img/TresLeches.webp" alt="Foto de Tres Leches" loading="lazy" data-pid="tres-leches" onerror="capriciosaImg(this)"></div><div class="card-body">  <div class="card-top">    <span class="card-badge">Nuvola</span>    <span class="card-sticker">3L</span>  </div>  <h3>Tres Leches</h3>  <p class="p-desc">Bizcochuelo de vainilla humedecido con 3 leches, coronado con un merengue liviano y lluvia de canela.</p>  <div class="card-foot">    <span class="price">ARS 12.000</span>    <span class="card-go">Ver detalle →</span>  </div></div></a><button type="button" class="add-btn" data-cart-add="tres-leches" aria-label="Agregar Tres Leches al carrito">+ Agregar</button></div></div>
       </div>
     </section>
   </main>

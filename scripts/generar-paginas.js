@@ -22,11 +22,15 @@ const ROOT = path.join(__dirname, "..");
 const read = (f) => fs.readFileSync(path.join(ROOT, f), "utf8");
 const write = (f, s) => fs.writeFileSync(path.join(ROOT, f), s);
 
-// Carga products.js igual que el navegador (window es el objeto global)
+// Carga products.js y product.js igual que el navegador (window es el objeto global).
+// product.js arma el HTML de la página de producto: se usa el mismo código acá y en el navegador.
 const sandbox = {};
 sandbox.window = sandbox;
-vm.runInNewContext(read("js/products.js").replace(/^﻿/, ""), sandbox);
-const { CONFIG, PRODUCTS, helpers } = sandbox.CAPRICIOSA;
+vm.createContext(sandbox);
+for (const f of ["js/products.js", "js/product.js"]) {
+  vm.runInContext(read(f).replace(/^\uFEFF/, ""), sandbox, { filename: f });
+}
+const { CONFIG, PRODUCTS, helpers, productPage } = sandbox.CAPRICIOSA;
 const SITE = CONFIG.siteUrl;
 if (!/^https:\/\/.+\/$/.test(SITE)) {
   throw new Error("CONFIG.siteUrl tiene que empezar con https:// y terminar en /");
@@ -50,11 +54,14 @@ function jpegSize(file) {
   throw new Error("No pude leer el tamaño de " + file);
 }
 
-function productPage(p) {
+function productHtml(p) {
   const title = `${p.name} · Capricciosa`;
   const url = `${SITE}productos/${p.id}.html`;
   const img = jpegSize(p.image);
-  const price = p.price ? `${p.priceNote} ${p.price}` : p.priceNote;
+  const parts = productPage.render(p);
+  if (!fs.existsSync(path.join(ROOT, helpers.photo(p)))) {
+    console.warn(`AVISO: falta ${helpers.photo(p)} (la página va a mostrar ${p.image}). Convertí la foto a WebP.`);
+  }
   // Misma frase que la descripción de la portada
   const description = `${p.description} Pedí por WhatsApp. Pickup y envíos · San Cristóbal, CABA.`;
   return `<!DOCTYPE html>
@@ -81,33 +88,22 @@ function productPage(p) {
   <meta property="og:image:alt" content="Foto de ${esc(p.name)}">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="theme-color" content="#FFDFEF">
-  <link rel="preload" href="${esc(helpers.photo(p))}" as="image" type="image/webp" fetchpriority="high">
   <link rel="stylesheet" href="css/styles.css">
 </head>
-<body data-producto="${esc(p.id)}">
+<body data-producto="${esc(p.id)}" data-firma="${productPage.signature(parts)}">
 
   <header class="site-header" id="cabecera"></header>
 
   <main>
-    <!-- Lo dibuja js/product.js con los datos de js/products.js -->
+    <!-- Contenido armado con js/product.js; si products.js cambia, el navegador lo vuelve a dibujar -->
     <section class="product-hero">
-      <div class="container" id="product-hero">
-        <noscript>
-          <div class="noscript-box">
-            <a class="crumb" href="index.html#menu">← Volver al menú</a>
-            <h1>${esc(p.name)}</h1>
-            <p class="desc">${esc(p.description)}</p>
-            <p class="desc"><strong>${esc(price)}</strong>${p.size ? " · " + esc(p.size) : ""}</p>
-            <a class="btn btn-wa" href="${esc(helpers.waOrderLink(p))}" target="_blank" rel="noopener noreferrer">Pedir por WhatsApp</a>
-          </div>
-        </noscript>
-      </div>
+      <div class="container" id="product-hero">${parts.hero}</div>
     </section>
 
     <section class="section bone" id="product-detail">
       <div class="container product-detail">
-        <div class="detail-card" id="detail-card"></div>
-        <div class="detail-card wa-panel" id="wa-panel"></div>
+        <div class="detail-card" id="detail-card">${parts.detail}</div>
+        <div class="detail-card wa-panel" id="wa-panel">${parts.wa}</div>
       </div>
     </section>
 
@@ -117,7 +113,7 @@ function productPage(p) {
           <span class="section-eyebrow">Seguro que también te gustan</span>
           <h2>Más capriccitos</h2>
         </div>
-        <div class="related-grid" id="related-grid"></div>
+        <div class="related-grid" id="related-grid">${parts.related}</div>
       </div>
     </section>
   </main>
@@ -148,7 +144,7 @@ for (const f of fs.readdirSync(path.join(ROOT, "productos"))) {
 const sorted = PRODUCTS.slice().sort((a, b) => a.order - b.order);
 for (const p of sorted) {
   if (!/^[a-z0-9-]+$/.test(p.id)) { throw new Error(`id inválido: "${p.id}" (solo minúsculas, números y guiones)`); }
-  write(`productos/${p.id}.html`, productPage(p));
+  write(`productos/${p.id}.html`, productHtml(p));
 }
 console.log(`generadas ${sorted.length} páginas en productos/`);
 

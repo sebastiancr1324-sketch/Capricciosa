@@ -289,7 +289,8 @@ CAPRICIOSA.helpers = {
   },
   addToCartButton: function (product) {
     if (!product || !product.price) { return ""; }
-    return '<button type="button" class="add-btn" data-cart-add="' + product.id + '" aria-label="Agregar ' + product.name + ' al carrito">+ Agregar</button>';
+    var esc = CAPRICIOSA.helpers.escapeHtml;
+    return '<button type="button" class="add-btn" data-cart-add="' + esc(product.id) + '" aria-label="Agregar ' + esc(product.name) + ' al carrito">+ Agregar</button>';
   },
   parsePrice: function (product) {
     if (!product || !product.price) { return null; }

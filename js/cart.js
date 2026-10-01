@@ -6,7 +6,7 @@
 
   var state = load();
 
-  var fab, badge, overlay, drawer, bodyEl, totalEl, checkoutEl;
+  var badge, overlay, drawer, bodyEl, totalEl, checkoutEl, liveEl;
 
   function load() {
     try {
@@ -128,13 +128,22 @@
 
   function flash(btn) {
     if (!btn) { return; }
-    var original = btn.innerHTML;
+    // El texto original se guarda una sola vez: con dos toques seguidos antes se guardaba
+    // "✓ Agregado" como original y el botón quedaba trabado así
+    if (!btn.dataset.label) { btn.dataset.label = btn.innerHTML; }
+    clearTimeout(btn.flashTimer);
     btn.innerHTML = "✓ Agregado";
     btn.classList.add("added");
-    setTimeout(function () {
-      btn.innerHTML = original;
+    btn.flashTimer = setTimeout(function () {
+      btn.innerHTML = btn.dataset.label;
       btn.classList.remove("added");
     }, 1200);
+  }
+
+  function announce(text) {
+    // Región aria-live: el lector de pantalla avisa que se agregó, sin cambiar nada visible
+    liveEl.textContent = "";
+    setTimeout(function () { liveEl.textContent = text; }, 50);
   }
 
   function waLink() {
@@ -233,6 +242,7 @@
       '  <span class="cart-badge hidden" data-cart-badge>0</span>' +
       '</button>' +
       '<div class="cart-overlay" data-cart-close></div>' +
+      '<p class="sr-only" aria-live="polite" data-cart-live></p>' +
       '<aside class="cart-drawer" data-cart-drawer role="dialog" aria-modal="true" aria-labelledby="cart-title">' +
       '  <div class="cart-head">' +
       '    <div>' +
@@ -257,20 +267,23 @@
 
     while (rootEl.firstChild) { document.body.appendChild(rootEl.firstChild); }
 
-    fab = document.querySelector(".cart-fab");
     badge = document.querySelector("[data-cart-badge]");
     overlay = document.querySelector(".cart-overlay");
     drawer = document.querySelector("[data-cart-drawer]");
     bodyEl = document.querySelector("[data-cart-body]");
     totalEl = document.querySelector("[data-cart-total]");
     checkoutEl = document.querySelector("[data-cart-checkout]");
+    liveEl = document.querySelector("[data-cart-live]");
   }
 
   document.addEventListener("click", function (e) {
     var addBtn = e.target.closest("[data-cart-add]");
     if (addBtn) {
-      add(addBtn.getAttribute("data-cart-add"));
+      var addId = addBtn.getAttribute("data-cart-add");
+      add(addId);
       flash(addBtn);
+      var added = helpers.getProduct(addId);
+      if (added) { announce(added.name + " agregado al carrito. Total: " + count() + " en tu pedido."); }
       return;
     }
     var inc = e.target.closest("[data-cart-inc]");
@@ -299,6 +312,14 @@
     if (!isOpen()) { return; }
     if (e.key === "Escape") { close(); }
     if (e.key === "Tab") { trapTab(e); }
+  });
+
+  // Si el carrito cambia en otra pestaña, se actualiza acá y no se pisa al guardar
+  window.addEventListener("storage", function (e) {
+    if (e.key === STORAGE_KEY) {
+      state = load();
+      render();
+    }
   });
 
   buildDOM();
